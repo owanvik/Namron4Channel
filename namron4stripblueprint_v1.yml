@@ -1,0 +1,304 @@
+blueprint:
+  name: Multi-endpoint Zigbee Device Control
+  description: |
+    Control multiple lights using a multi-endpoint Zigbee device through ZHA integration. 
+    Each endpoint controls a different light with on/off and brightness adjustment.
+  domain: automation
+  input:
+    device:
+      name: Zigbee Device
+      description: The Zigbee device that triggers the automation
+      selector:
+        device:
+          integration: zha
+    light_1:
+      name: Light 1
+      description: The first light to control
+      selector:
+        entity:
+          domain: light
+    light_2:
+      name: Light 2
+      description: The second light to control
+      selector:
+        entity:
+          domain: light
+    light_3:
+      name: Light 3
+      description: The third light to control
+      selector:
+        entity:
+          domain: light
+    light_4:
+      name: Light 4
+      description: The fourth light to control
+      selector:
+        entity:
+          domain: light
+
+trigger:
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input device
+      endpoint_id: 1
+    id: endpoint_1
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input device
+      endpoint_id: 2
+    id: endpoint_2
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input device
+      endpoint_id: 3
+    id: endpoint_3
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input device
+      endpoint_id: 4
+    id: endpoint_4
+
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: endpoint_1
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'on' }}"
+        sequence:
+          - service: light.turn_on
+            target:
+              entity_id: !input light_1
+      - conditions:
+          - condition: trigger
+            id: endpoint_1
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'off' }}"
+        sequence:
+          - service: light.turn_off
+            target:
+              entity_id: !input light_1
+      - conditions:
+          - condition: trigger
+            id: endpoint_1
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'move_with_on_off' }}"
+        sequence:
+          - repeat:
+              while:
+                - condition: template
+                  value_template: "{{ trigger.event.data.command == 'move_with_on_off' }}"
+              sequence:
+                - service: light.turn_on
+                  data:
+                    brightness_step_pct: 10
+                  target:
+                    entity_id: !input light_1
+                - delay:
+                    milliseconds: 50
+      - conditions:
+          - condition: trigger
+            id: endpoint_1
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'move' }}"
+        sequence:
+          - repeat:
+              while:
+                - condition: template
+                  value_template: "{{ trigger.event.data.command == 'move' }}"
+                - condition: numeric_state
+                  entity_id: !input light_1
+                  attribute: brightness
+                  above: 2
+              sequence:
+                - service: light.turn_on
+                  data:
+                    brightness_step_pct: -10
+                  target:
+                    entity_id: !input light_1
+                - delay:
+                    milliseconds: 50
+
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: endpoint_2
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'on' }}"
+        sequence:
+          - service: light.turn_on
+            target:
+              entity_id: !input light_2
+      - conditions:
+          - condition: trigger
+            id: endpoint_2
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'off' }}"
+        sequence:
+          - service: light.turn_off
+            target:
+              entity_id: !input light_2
+      - conditions:
+          - condition: trigger
+            id: endpoint_2
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'move_with_on_off' }}"
+        sequence:
+          - repeat:
+              while:
+                - condition: template
+                  value_template: "{{ trigger.event.data.command == 'move_with_on_off' }}"
+              sequence:
+                - service: light.turn_on
+                  data:
+                    brightness_step_pct: 10
+                  target:
+                    entity_id: !input light_2
+                - delay:
+                    milliseconds: 50
+      - conditions:
+          - condition: trigger
+            id: endpoint_2
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'move' }}"
+        sequence:
+          - repeat:
+              while:
+                - condition: template
+                  value_template: "{{ trigger.event.data.command == 'move' }}"
+                - condition: numeric_state
+                  entity_id: !input light_2
+                  attribute: brightness
+                  above: 2
+              sequence:
+                - service: light.turn_on
+                  data:
+                    brightness_step_pct: -10
+                  target:
+                    entity_id: !input light_2
+                - delay:
+                    milliseconds: 50
+
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: endpoint_3
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'on' }}"
+        sequence:
+          - service: light.turn_on
+            target:
+              entity_id: !input light_3
+      - conditions:
+          - condition: trigger
+            id: endpoint_3
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'off' }}"
+        sequence:
+          - service: light.turn_off
+            target:
+              entity_id: !input light_3
+      - conditions:
+          - condition: trigger
+            id: endpoint_3
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'move_with_on_off' }}"
+        sequence:
+          - repeat:
+              while:
+                - condition: template
+                  value_template: "{{ trigger.event.data.command == 'move_with_on_off' }}"
+              sequence:
+                - service: light.turn_on
+                  data:
+                    brightness_step_pct: 10
+                  target:
+                    entity_id: !input light_3
+                - delay:
+                    milliseconds: 50
+      - conditions:
+          - condition: trigger
+            id: endpoint_3
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'move' }}"
+        sequence:
+          - repeat:
+              while:
+                - condition: template
+                  value_template: "{{ trigger.event.data.command == 'move' }}"
+                - condition: numeric_state
+                  entity_id: !input light_3
+                  attribute: brightness
+                  above: 2
+              sequence:
+                - service: light.turn_on
+                  data:
+                    brightness_step_pct: -10
+                  target:
+                    entity_id: !input light_3
+                - delay:
+                    milliseconds: 50
+
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: endpoint_4
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'on' }}"
+        sequence:
+          - service: light.turn_on
+            target:
+              entity_id: !input light_4
+      - conditions:
+          - condition: trigger
+            id: endpoint_4
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'off' }}"
+        sequence:
+          - service: light.turn_off
+            target:
+              entity_id: !input light_4
+      - conditions:
+          - condition: trigger
+            id: endpoint_4
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'move_with_on_off' }}"
+        sequence:
+          - repeat:
+              while:
+                - condition: template
+                  value_template: "{{ trigger.event.data.command == 'move_with_on_off' }}"
+              sequence:
+                - service: light.turn_on
+                  data:
+                    brightness_step_pct: 10
+                  target:
+                    entity_id: !input light_4
+                - delay:
+                    milliseconds: 50
+      - conditions:
+          - condition: trigger
+            id: endpoint_4
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'move' }}"
+        sequence:
+          - repeat:
+              while:
+                - condition: template
+                  value_template: "{{ trigger.event.data.command == 'move' }}"
+                - condition: numeric_state
+                  entity_id: !input light_4
+                  attribute: brightness
+                  above: 2
+              sequence:
+                - service: light.turn_on
+                  data:
+                    brightness_step_pct: -10
+                  target:
+                    entity_id: !input light_4
+                - delay:
+                    milliseconds: 50
