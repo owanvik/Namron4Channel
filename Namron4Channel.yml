@@ -4,12 +4,11 @@ blueprint:
   domain: automation
   input:
     device:
-      name: Remote
-      description: Namron controller
+      name: Namron Switch
+      description: "Choose your Namron switch"
       selector:
-        device:
-          integration: zha
-          manufacturer: NAMRON AS
+        entity:
+          domain: remote
     light_entity1:
       name: Light Entity 1
       description: The light entity controlled by endpoint 1.
