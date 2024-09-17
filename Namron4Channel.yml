@@ -7,7 +7,8 @@ blueprint:
       name: Namron Switch
       description: "Choose your Namron switch"
       selector:
-        device:
+        entity:
+          domain: button
     light_entity1:
       name: Light Entity 1
       description: The light entity controlled by endpoint 1.
