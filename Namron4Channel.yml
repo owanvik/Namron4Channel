@@ -3,13 +3,13 @@ blueprint:
   description: "Handles actions for a 4-button Namron switch, with the possibility of custom actions per endpoint."
   domain: automation
   input:
-    device:
+    switch_device:
       name: Namron Switch
       description: "Choose your Namron switch"
       selector:
         device:
-        integration: zha
-          manufacturer: NAMRON AS
+          integration: zha
+          manufacturer: NAMRON
     light_entity1:
       name: Light Entity 1
       description: The light entity controlled by endpoint 1.
@@ -87,56 +87,56 @@ trigger:
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input "device"
+      device_id: "{{ trigger.event.data.device_id }}"
       endpoint_id: 1
       command: "on"
     id: on1
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input "device"
+      device_id: "{{ trigger.event.data.device_id }}"
       endpoint_id: 1
       command: "off"
     id: off1
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input "device"
+      device_id: "{{ trigger.event.data.device_id }}"
       endpoint_id: 2
       command: "on"
     id: on2
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input "device"
+      device_id: "{{ trigger.event.data.device_id }}"
       endpoint_id: 2
       command: "off"
     id: off2
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input "device"
+      device_id: "{{ trigger.event.data.device_id }}"
       endpoint_id: 3
       command: "on"
     id: on3
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input "device"
+      device_id: "{{ trigger.event.data.device_id }}"
       endpoint_id: 3
       command: "off"
     id: off3
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input "device"
+      device_id: "{{ trigger.event.data.device_id }}"
       endpoint_id: 4
       command: "on"
     id: on4
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input "device"
+      device_id: "{{ trigger.event.data.device_id }}"
       endpoint_id: 4
       command: "off"
     id: off4
