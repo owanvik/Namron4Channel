@@ -1,0 +1,234 @@
+blueprint:
+  name: "Customizable 4-Button Namron Switch"
+  description: "Handles actions for a 4-button Namron switch, with the possibility of custom actions per endpoint."
+  domain: automation
+  input:
+    device:
+      name: Namron Switch
+      description: "Choose your Namron switch"
+      selector:
+        device:
+          integration: zha
+          manufacturer: NAMRON
+    custom_action_1_on:
+      name: Custom Action for Endpoint 1 On
+      description: "Custom action to execute when button 1 is turned on."
+      default: []
+      selector:
+        action: {}
+    custom_action_1_off:
+      name: Custom Action for Endpoint 1 Off
+      description: "Custom action to execute when button 1 is turned off."
+      default: []
+      selector:
+        action: {}
+    custom_action_2_on:
+      name: Custom Action for Endpoint 2 On
+      description: "Custom action to execute when button 2 is turned on."
+      default: []
+      selector:
+        action: {}
+    custom_action_2_off:
+      name: Custom Action for Endpoint 2 Off
+      description: "Custom action to execute when button 2 is turned off."
+      default: []
+      selector:
+        action: {}
+    custom_action_3_on:
+      name: Custom Action for Endpoint 3 On
+      description: "Custom action to execute when button 3 is turned on."
+      default: []
+      selector:
+        action: {}
+    custom_action_3_off:
+      name: Custom Action for Endpoint 3 Off
+      description: "Custom action to execute when button 3 is turned off."
+      default: []
+      selector:
+        action: {}
+    custom_action_4_on:
+      name: Custom Action for Endpoint 4 On
+      description: "Custom action to execute when button 4 is turned on."
+      default: []
+      selector:
+        action: {}
+    custom_action_4_off:
+      name: Custom Action for Endpoint 4 Off
+      description: "Custom action to execute when button 4 is turned off."
+      default: []
+      selector:
+        action: {}
+
+trigger:
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input "device"
+      endpoint_id: 1
+      command: "on"
+    id: on1
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input "device"
+      endpoint_id: 1
+      command: "off"
+    id: off1
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input "device"
+      endpoint_id: 2
+      command: "on"
+    id: on2
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input "device"
+      endpoint_id: 2
+      command: "off"
+    id: off2
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input "device"
+      endpoint_id: 3
+      command: "on"
+    id: on3
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input "device"
+      endpoint_id: 3
+      command: "off"
+    id: off3
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input "device"
+      endpoint_id: 4
+      command: "on"
+    id: on4
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input "device"
+      endpoint_id: 4
+      command: "off"
+    id: off4
+
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: on1
+        sequence:
+          - choose:
+              - conditions:
+                  - condition: template
+                    value_template: "{{ input.custom_action_1_on | length > 0 }}"
+                sequence: !input custom_action_1_on
+              default:
+                - service: light.turn_on
+                  target:
+                    entity_id: light.entity1
+
+      - conditions:
+          - condition: trigger
+            id: off1
+        sequence:
+          - choose:
+              - conditions:
+                  - condition: template
+                    value_template: "{{ input.custom_action_1_off | length > 0 }}"
+                sequence: !input custom_action_1_off
+              default:
+                - service: light.turn_off
+                  target:
+                    entity_id: light.entity1
+
+      - conditions:
+          - condition: trigger
+            id: on2
+        sequence:
+          - choose:
+              - conditions:
+                  - condition: template
+                    value_template: "{{ input.custom_action_2_on | length > 0 }}"
+                sequence: !input custom_action_2_on
+              default:
+                - service: light.turn_on
+                  target:
+                    entity_id: light.entity2
+
+      - conditions:
+          - condition: trigger
+            id: off2
+        sequence:
+          - choose:
+              - conditions:
+                  - condition: template
+                    value_template: "{{ input.custom_action_2_off | length > 0 }}"
+                sequence: !input custom_action_2_off
+              default:
+                - service: light.turn_off
+                  target:
+                    entity_id: light.entity2
+
+      - conditions:
+          - condition: trigger
+            id: on3
+        sequence:
+          - choose:
+              - conditions:
+                  - condition: template
+                    value_template: "{{ input.custom_action_3_on | length > 0 }}"
+                sequence: !input custom_action_3_on
+              default:
+                - service: light.turn_on
+                  target:
+                    entity_id: light.entity3
+
+      - conditions:
+          - condition: trigger
+            id: off3
+        sequence:
+          - choose:
+              - conditions:
+                  - condition: template
+                    value_template: "{{ input.custom_action_3_off | length > 0 }}"
+                sequence: !input custom_action_3_off
+              default:
+                - service: light.turn_off
+                  target:
+                    entity_id: light.entity3
+
+      - conditions:
+          - condition: trigger
+            id: on4
+        sequence:
+          - choose:
+              - conditions:
+                  - condition: template
+                    value_template: "{{ input.custom_action_4_on | length > 0 }}"
+                sequence: !input custom_action_4_on
+              default:
+                - service: light.turn_on
+                  target:
+                    entity_id: light.entity4
+
+      - conditions:
+          - condition: trigger
+            id: off4
+        sequence:
+          - choose:
+              - conditions:
+                  - condition: template
+                    value_template: "{{ input.custom_action_4_off | length > 0 }}"
+                sequence: !input custom_action_4_off
+              default:
+                - service: light.turn_off
+                  target:
+                    entity_id: light.entity4
+
+mode: restart
