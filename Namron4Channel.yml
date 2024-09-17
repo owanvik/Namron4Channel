@@ -4,8 +4,8 @@ blueprint:
   domain: automation
   input:
     remote:
-      name: Namron Switch
-      description: "Choose your Namron switch"
+      name: Remote
+      description: Namron controller
       selector:
         device:
           integration: zha
