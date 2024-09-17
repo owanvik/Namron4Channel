@@ -11,25 +11,25 @@ blueprint:
           integration: zha
           manufacturer: NAMRON
 
-    light_entity_1:
+    light_entity1:
       name: Light Entity 1
       description: The light entity controlled by endpoint 1.
       selector:
         entity:
           domain: light
-    light_entity_2:
+    light_entity2:
       name: Light Entity 2
       description: The light entity controlled by endpoint 2.
       selector:
         entity:
           domain: light
-    light_entity_3:
+    light_entity3:
       name: Light Entity 3
       description: The light entity controlled by endpoint 3.
       selector:
         entity:
           domain: light
-    light_entity_4:
+    light_entity4:
       name: Light Entity 4
       description: The light entity controlled by endpoint 4.
       selector:
