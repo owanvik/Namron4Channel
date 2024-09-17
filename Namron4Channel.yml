@@ -10,6 +10,31 @@ blueprint:
         device:
           integration: zha
           manufacturer: NAMRON
+
+    light_entity_1:
+      name: Light Entity 1
+      description: The light entity controlled by endpoint 1.
+      selector:
+        entity:
+          domain: light
+    light_entity_2:
+      name: Light Entity 2
+      description: The light entity controlled by endpoint 2.
+      selector:
+        entity:
+          domain: light
+    light_entity_3:
+      name: Light Entity 3
+      description: The light entity controlled by endpoint 3.
+      selector:
+        entity:
+          domain: light
+    light_entity_4:
+      name: Light Entity 4
+      description: The light entity controlled by endpoint 4.
+      selector:
+        entity:
+          domain: light
     custom_action_1_on:
       name: Custom Action for Endpoint 1 On
       description: "Custom action to execute when button 1 is turned on."
