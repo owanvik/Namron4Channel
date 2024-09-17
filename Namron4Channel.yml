@@ -87,56 +87,56 @@ trigger:
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input "device"
+      device_id: !input "device_id"
       endpoint_id: 1
       command: "on"
     id: on1
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input "device"
+      device_id: !input "device_id"
       endpoint_id: 1
       command: "off"
     id: off1
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input "device"
+      device_id: !input "device_id"
       endpoint_id: 2
       command: "on"
     id: on2
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input "device"
+      device_id: !input "device_id"
       endpoint_id: 2
       command: "off"
     id: off2
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input "device"
+      device_id: !input "device_id"
       endpoint_id: 3
       command: "on"
     id: on3
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input "device"
+      device_id: !input "device_id"
       endpoint_id: 3
       command: "off"
     id: off3
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input "device"
+      device_id: !input "device_id"
       endpoint_id: 4
       command: "on"
     id: on4
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input "device"
+      device_id: !input "device_id"
       endpoint_id: 4
       command: "off"
     id: off4
