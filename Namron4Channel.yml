@@ -1,6 +1,6 @@
 blueprint:
   name: "Customizable 4-Button Namron Switch"
-  description: "Handles actions for a 4-button Namron switch, with the possibility of custom actions per endpoint."
+  description: "Handles actions for a 4-button Namron switch, with the possibility of custom actions per endpoint. Adding custom actions disables the default action."
   domain: automation
   input:
     device:
