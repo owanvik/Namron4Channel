@@ -5,9 +5,9 @@ blueprint:
   input:
     device_id:
       name: Device ID
-      description: "Specify the device ID for the ZHA device."
+      description: The device ID of the ZHA switch.
       selector:
-        text:
+        text: {}
     light_entity_1:
       name: Light Entity 1
       description: The light entity controlled by endpoint 1.
@@ -32,6 +32,7 @@ blueprint:
       selector:
         entity:
           domain: light
+
     # Custom Actions for Endpoint 1
     custom_action_1_on:
       name: Custom Action 1 On
@@ -57,12 +58,7 @@ blueprint:
       default: []
       selector:
         action: {}
-    custom_action_1_on_release_down:
-      name: Custom Action 1 On Release Down
-      description: Custom action to perform when endpoint 1 is released after a hold.
-      default: []
-      selector:
-        action: {}
+
     # Custom Actions for Endpoint 2
     custom_action_2_on:
       name: Custom Action 2 On
@@ -88,12 +84,7 @@ blueprint:
       default: []
       selector:
         action: {}
-    custom_action_2_on_release_down:
-      name: Custom Action 2 On Release Down
-      description: Custom action to perform when endpoint 2 is released after a hold.
-      default: []
-      selector:
-        action: {}
+
     # Custom Actions for Endpoint 3
     custom_action_3_on:
       name: Custom Action 3 On
@@ -119,12 +110,7 @@ blueprint:
       default: []
       selector:
         action: {}
-    custom_action_3_on_release_down:
-      name: Custom Action 3 On Release Down
-      description: Custom action to perform when endpoint 3 is released after a hold.
-      default: []
-      selector:
-        action: {}
+
     # Custom Actions for Endpoint 4
     custom_action_4_on:
       name: Custom Action 4 On
@@ -147,12 +133,6 @@ blueprint:
     custom_action_4_off_hold:
       name: Custom Action 4 Off Hold
       description: Custom action to perform when endpoint 4 is released from hold.
-      default: []
-      selector:
-        action: {}
-    custom_action_4_on_release_down:
-      name: Custom Action 4 On Release Down
-      description: Custom action to perform when endpoint 4 is released after a hold.
       default: []
       selector:
         action: {}
@@ -323,166 +303,4 @@ trigger:
       command: "off"
     id: off4
   - platform: event
-    event_type: zha_event
-    event_data:
-      device_id: !input device_id
-      endpoint_id: 4
-      command: move_with_on_off
-      args:
-        - 0
-        - 50
-    id: onHold4
-  - platform: event
-    event_type: zha_event
-    event_data:
-      device_id: !input device_id
-      endpoint_id: 4
-      command: stop_with_on_off
-    id: onRelease4
-  - platform: event
-    event_type: zha_event
-    event_data:
-      device_id: !input device_id
-      endpoint_id: 4
-      command: move
-      args:
-        - 1
-        - 50
-        - 0
-        - 0
-    id: offHold4
-  - platform: event
-    event_type: zha_event
-    event_data:
-      device_id: !input device_id
-      endpoint_id: 4
-      command: stop
-    id: onReleaseDown4
-
-action:
-  - choose:
-      # Actions for Endpoint 1
-      - conditions:
-          - condition: trigger
-            id: on1
-          - condition: state
-            entity_id: !input light_entity_1
-            state: "off"
-        sequence: !input custom_action_1_on
-      - conditions:
-          - condition: trigger
-            id: off1
-          - condition: state
-            entity_id: !input light_entity_1
-            state: "on"
-        sequence: !input custom_action_1_off
-      - conditions:
-          - condition: trigger
-            id: onHold1
-        sequence: !input custom_action_1_on_hold
-      - conditions:
-          - condition: trigger
-            id: onRelease1
-        sequence: !input custom_action_1_off_hold
-      - conditions:
-          - condition: trigger
-            id: offHold1
-        sequence: !input custom_action_1_off_hold
-      - conditions:
-          - condition: trigger
-            id: onReleaseDown1
-        sequence: !input custom_action_1_on_release_down
-      # Actions for Endpoint 2
-      - conditions:
-          - condition: trigger
-            id: on2
-          - condition: state
-            entity_id: !input light_entity_2
-            state: "off"
-        sequence: !input custom_action_2_on
-      - conditions:
-          - condition: trigger
-            id: off2
-          - condition: state
-            entity_id: !input light_entity_2
-            state: "on"
-        sequence: !input custom_action_2_off
-      - conditions:
-          - condition: trigger
-            id: onHold2
-        sequence: !input custom_action_2_on_hold
-      - conditions:
-          - condition: trigger
-            id: onRelease2
-        sequence: !input custom_action_2_off_hold
-      - conditions:
-          - condition: trigger
-            id: offHold2
-        sequence: !input custom_action_2_off_hold
-      - conditions:
-          - condition: trigger
-            id: onReleaseDown2
-        sequence: !input custom_action_2_on_release_down
-      # Actions for Endpoint 3
-      - conditions:
-          - condition: trigger
-            id: on3
-          - condition: state
-            entity_id: !input light_entity_3
-            state: "off"
-        sequence: !input custom_action_3_on
-      - conditions:
-          - condition: trigger
-            id: off3
-          - condition: state
-            entity_id: !input light_entity_3
-            state: "on"
-        sequence: !input custom_action_3_off
-      - conditions:
-          - condition: trigger
-            id: onHold3
-        sequence: !input custom_action_3_on_hold
-      - conditions:
-          - condition: trigger
-            id: onRelease3
-        sequence: !input custom_action_3_off_hold
-      - conditions:
-          - condition: trigger
-            id: offHold3
-        sequence: !input custom_action_3_off_hold
-      - conditions:
-          - condition: trigger
-            id: onReleaseDown3
-        sequence: !input custom_action_3_on_release_down
-      # Actions for Endpoint 4
-      - conditions:
-          - condition: trigger
-            id: on4
-          - condition: state
-            entity_id: !input light_entity_4
-            state: "off"
-        sequence: !input custom_action_4_on
-      - conditions:
-          - condition: trigger
-            id: off4
-          - condition: state
-            entity_id: !input light_entity_4
-            state: "on"
-        sequence: !input custom_action_4_off
-      - conditions:
-          - condition: trigger
-            id: onHold4
-        sequence: !input custom_action_4_on_hold
-      - conditions:
-          - condition: trigger
-            id: onRelease4
-        sequence: !input custom_action_4_off_hold
-      - conditions:
-          - condition: trigger
-            id: offHold4
-        sequence: !input custom_action_4_off_hold
-      - conditions:
-          - condition: trigger
-            id: onReleaseDown4
-        sequence: !input custom_action_4_on_release_down
-    default: []
+    event_type:
