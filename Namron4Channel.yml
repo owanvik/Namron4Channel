@@ -241,16 +241,16 @@ action:
           - condition: trigger
             id: on1
         sequence:
-          - data:
+          - service: light.turn_on
+            data:
               entity_id: !input light_entity_1
-            action: light.turn_on
       - conditions:
           - condition: trigger
             id: off1
         sequence:
-          - data:
+          - service: light.turn_off
+            data:
               entity_id: !input light_entity_1
-            action: light.turn_off
       - conditions:
           - condition: trigger
             id: onHold1
@@ -260,16 +260,11 @@ action:
                 - condition: trigger
                   id: onHold1
               sequence:
-                - data:
-                    brightness_step: 10
-                  target:
+                - service: light.turn_on
+                  data:
                     entity_id: !input light_entity_1
-                  action: light.turn_on
-                - delay:
-                    hours: 0
-                    minutes: 0
-                    seconds: 0
-                    milliseconds: 20
+                    brightness_step: 10
+                - delay: 0:00:00.020
       - conditions:
           - condition: trigger
             id: offHold1
@@ -280,33 +275,25 @@ action:
                   conditions:
                     - condition: trigger
                       id: offHold1
-                - condition: numeric_state
-                  entity_id: !input light_entity_1
-                  value_template: >-
-                    {% if states[!input light_entity_1].state == "on"  %}{{
-                    states[!input light_entity_1].attributes.brightness }}{% else %}0{% endif %}
-                  above: 2
-                  attribute: brightness
+                    - condition: numeric_state
+                      entity_id: !input light_entity_1
+                      attribute: brightness
+                      above: 2
               sequence:
-                - data:
-                    brightness_step_pct: -10
-                  target:
+                - service: light.turn_on
+                  data:
                     entity_id: !input light_entity_1
-                  action: light.turn_on
-                - delay:
-                    hours: 0
-                    minutes: 0
-                    seconds: 0
-                    milliseconds: 20
+                    brightness_step_pct: -10
+                - delay: 0:00:00.020
       - conditions:
           - condition: trigger
             id: onReleaseDown1
         sequence:
-          - data:
+          - service: light.turn_on
+            data:
               entity_id: !input light_entity_1
               brightness_pct: 1
-            action: light.turn_on
-          
+
       # Repeat similar action sequences for other endpoints
       # Replace endpoint ID and light entity as needed
 
@@ -314,16 +301,16 @@ action:
           - condition: trigger
             id: on2
         sequence:
-          - data:
+          - service: light.turn_on
+            data:
               entity_id: !input light_entity_2
-            action: light.turn_on
       - conditions:
           - condition: trigger
             id: off2
         sequence:
-          - data:
+          - service: light.turn_off
+            data:
               entity_id: !input light_entity_2
-            action: light.turn_off
       - conditions:
           - condition: trigger
             id: onHold2
@@ -333,16 +320,11 @@ action:
                 - condition: trigger
                   id: onHold2
               sequence:
-                - data:
-                    brightness_step: 10
-                  target:
+                - service: light.turn_on
+                  data:
                     entity_id: !input light_entity_2
-                  action: light.turn_on
-                - delay:
-                    hours: 0
-                    minutes: 0
-                    seconds: 0
-                    milliseconds: 20
+                    brightness_step: 10
+                - delay: 0:00:00.020
       - conditions:
           - condition: trigger
             id: offHold2
@@ -353,47 +335,39 @@ action:
                   conditions:
                     - condition: trigger
                       id: offHold2
-                - condition: numeric_state
-                  entity_id: !input light_entity_2
-                  value_template: >-
-                    {% if states[!input light_entity_2].state == "on"  %}{{
-                    states[!input light_entity_2].attributes.brightness }}{% else %}0{% endif %}
-                  above: 2
-                  attribute: brightness
+                    - condition: numeric_state
+                      entity_id: !input light_entity_2
+                      attribute: brightness
+                      above: 2
               sequence:
-                - data:
-                    brightness_step_pct: -10
-                  target:
+                - service: light.turn_on
+                  data:
                     entity_id: !input light_entity_2
-                  action: light.turn_on
-                - delay:
-                    hours: 0
-                    minutes: 0
-                    seconds: 0
-                    milliseconds: 20
+                    brightness_step_pct: -10
+                - delay: 0:00:00.020
       - conditions:
           - condition: trigger
             id: onReleaseDown2
         sequence:
-          - data:
+          - service: light.turn_on
+            data:
               entity_id: !input light_entity_2
               brightness_pct: 1
-            action: light.turn_on
 
       - conditions:
           - condition: trigger
             id: on3
         sequence:
-          - data:
+          - service: light.turn_on
+            data:
               entity_id: !input light_entity_3
-            action: light.turn_on
       - conditions:
           - condition: trigger
             id: off3
         sequence:
-          - data:
+          - service: light.turn_off
+            data:
               entity_id: !input light_entity_3
-            action: light.turn_off
       - conditions:
           - condition: trigger
             id: onHold3
@@ -403,16 +377,11 @@ action:
                 - condition: trigger
                   id: onHold3
               sequence:
-                - data:
-                    brightness_step: 10
-                  target:
+                - service: light.turn_on
+                  data:
                     entity_id: !input light_entity_3
-                  action: light.turn_on
-                - delay:
-                    hours: 0
-                    minutes: 0
-                    seconds: 0
-                    milliseconds: 20
+                    brightness_step: 10
+                - delay: 0:00:00.020
       - conditions:
           - condition: trigger
             id: offHold3
@@ -423,47 +392,39 @@ action:
                   conditions:
                     - condition: trigger
                       id: offHold3
-                - condition: numeric_state
-                  entity_id: !input light_entity_3
-                  value_template: >-
-                    {% if states[!input light_entity_3].state == "on"  %}{{
-                    states[!input light_entity_3].attributes.brightness }}{% else %}0{% endif %}
-                  above: 2
-                  attribute: brightness
+                    - condition: numeric_state
+                      entity_id: !input light_entity_3
+                      attribute: brightness
+                      above: 2
               sequence:
-                - data:
-                    brightness_step_pct: -10
-                  target:
+                - service: light.turn_on
+                  data:
                     entity_id: !input light_entity_3
-                  action: light.turn_on
-                - delay:
-                    hours: 0
-                    minutes: 0
-                    seconds: 0
-                    milliseconds: 20
+                    brightness_step_pct: -10
+                - delay: 0:00:00.020
       - conditions:
           - condition: trigger
             id: onReleaseDown3
         sequence:
-          - data:
+          - service: light.turn_on
+            data:
               entity_id: !input light_entity_3
               brightness_pct: 1
-            action: light.turn_on
 
       - conditions:
           - condition: trigger
             id: on4
         sequence:
-          - data:
+          - service: light.turn_on
+            data:
               entity_id: !input light_entity_4
-            action: light.turn_on
       - conditions:
           - condition: trigger
             id: off4
         sequence:
-          - data:
+          - service: light.turn_off
+            data:
               entity_id: !input light_entity_4
-            action: light.turn_off
       - conditions:
           - condition: trigger
             id: onHold4
@@ -473,16 +434,11 @@ action:
                 - condition: trigger
                   id: onHold4
               sequence:
-                - data:
-                    brightness_step: 10
-                  target:
+                - service: light.turn_on
+                  data:
                     entity_id: !input light_entity_4
-                  action: light.turn_on
-                - delay:
-                    hours: 0
-                    minutes: 0
-                    seconds: 0
-                    milliseconds: 20
+                    brightness_step: 10
+                - delay: 0:00:00.020
       - conditions:
           - condition: trigger
             id: offHold4
@@ -493,29 +449,21 @@ action:
                   conditions:
                     - condition: trigger
                       id: offHold4
-                - condition: numeric_state
-                  entity_id: !input light_entity_4
-                  value_template: >-
-                    {% if states[!input light_entity_4].state == "on"  %}{{
-                    states[!input light_entity_4].attributes.brightness }}{% else %}0{% endif %}
-                  above: 2
-                  attribute: brightness
+                    - condition: numeric_state
+                      entity_id: !input light_entity_4
+                      attribute: brightness
+                      above: 2
               sequence:
-                - data:
-                    brightness_step_pct: -10
-                  target:
+                - service: light.turn_on
+                  data:
                     entity_id: !input light_entity_4
-                  action: light.turn_on
-                - delay:
-                    hours: 0
-                    minutes: 0
-                    seconds: 0
-                    milliseconds: 20
+                    brightness_step_pct: -10
+                - delay: 0:00:00.020
       - conditions:
           - condition: trigger
             id: onReleaseDown4
         sequence:
-          - data:
+          - service: light.turn_on
+            data:
               entity_id: !input light_entity_4
               brightness_pct: 1
-            action: light.turn_on
