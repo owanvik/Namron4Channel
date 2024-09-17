@@ -1,6 +1,6 @@
 blueprint:
-  name: NAMRON 4 Channel ZigBee Switch v2.3
-  description: Controls lights based on ZHA events with default actions for each endpoint.
+  name: NAMRON 4 Channel ZigBee Switch v2.1
+  description: Controls lights based on ZHA events for each endpoint.
   domain: automation
   input:
     device_id:
@@ -37,21 +37,21 @@ trigger:
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: e903523f82c460e23e794f747e11410f
+      device_id: "{{ input.device_id }}"
       endpoint_id: 1
       command: "on"
     id: on1
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: e903523f82c460e23e794f747e11410f
+      device_id: "{{ input.device_id }}"
       endpoint_id: 1
       command: "off"
     id: off1
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: e903523f82c460e23e794f747e11410f
+      device_id: "{{ input.device_id }}"
       endpoint_id: 1
       command: move_with_on_off
       args:
@@ -61,14 +61,14 @@ trigger:
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: e903523f82c460e23e794f747e11410f
+      device_id: "{{ input.device_id }}"
       endpoint_id: 1
       command: stop_with_on_off
     id: onRelease1
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: e903523f82c460e23e794f747e11410f
+      device_id: "{{ input.device_id }}"
       endpoint_id: 1
       command: move
       args:
@@ -80,28 +80,28 @@ trigger:
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: e903523f82c460e23e794f747e11410f
+      device_id: "{{ input.device_id }}"
       endpoint_id: 1
       command: stop
     id: onReleaseDown1
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: e903523f82c460e23e794f747e11410f
+      device_id: "{{ input.device_id }}"
       endpoint_id: 2
       command: "on"
     id: on2
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: e903523f82c460e23e794f747e11410f
+      device_id: "{{ input.device_id }}"
       endpoint_id: 2
       command: "off"
     id: off2
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: e903523f82c460e23e794f747e11410f
+      device_id: "{{ input.device_id }}"
       endpoint_id: 2
       command: move_with_on_off
       args:
@@ -111,14 +111,14 @@ trigger:
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: e903523f82c460e23e794f747e11410f
+      device_id: "{{ input.device_id }}"
       endpoint_id: 2
       command: stop_with_on_off
     id: onRelease2
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: e903523f82c460e23e794f747e11410f
+      device_id: "{{ input.device_id }}"
       endpoint_id: 2
       command: move
       args:
@@ -130,28 +130,28 @@ trigger:
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: e903523f82c460e23e794f747e11410f
+      device_id: "{{ input.device_id }}"
       endpoint_id: 2
       command: stop
     id: onReleaseDown2
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: e903523f82c460e23e794f747e11410f
+      device_id: "{{ input.device_id }}"
       endpoint_id: 3
       command: "on"
     id: on3
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: e903523f82c460e23e794f747e11410f
+      device_id: "{{ input.device_id }}"
       endpoint_id: 3
       command: "off"
     id: off3
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: e903523f82c460e23e794f747e11410f
+      device_id: "{{ input.device_id }}"
       endpoint_id: 3
       command: move_with_on_off
       args:
@@ -161,14 +161,14 @@ trigger:
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: e903523f82c460e23e794f747e11410f
+      device_id: "{{ input.device_id }}"
       endpoint_id: 3
       command: stop_with_on_off
     id: onRelease3
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: e903523f82c460e23e794f747e11410f
+      device_id: "{{ input.device_id }}"
       endpoint_id: 3
       command: move
       args:
@@ -180,60 +180,24 @@ trigger:
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: e903523f82c460e23e794f747e11410f
+      device_id: "{{ input.device_id }}"
       endpoint_id: 3
       command: stop
     id: onReleaseDown3
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: e903523f82c460e23e794f747e11410f
+      device_id: "{{ input.device_id }}"
       endpoint_id: 4
       command: "on"
     id: on4
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: e903523f82c460e23e794f747e11410f
+      device_id: "{{ input.device_id }}"
       endpoint_id: 4
       command: "off"
     id: off4
-  - platform: event
-    event_type: zha_event
-    event_data:
-      device_id: e903523f82c460e23e794f747e11410f
-      endpoint_id: 4
-      command: move_with_on_off
-      args:
-        - 0
-        - 50
-    id: onHold4
-  - platform: event
-    event_type: zha_event
-    event_data:
-      device_id: e903523f82c460e23e794f747e11410f
-      endpoint_id: 4
-      command: stop_with_on_off
-    id: onRelease4
-  - platform: event
-    event_type: zha_event
-    event_data:
-      device_id: e903523f82c460e23e794f747e11410f
-      endpoint_id: 4
-      command: move
-      args:
-        - 1
-        - 50
-        - 0
-        - 0
-    id: offHold4
-  - platform: event
-    event_type: zha_event
-    event_data:
-      device_id: e903523f82c460e23e794f747e11410f
-      endpoint_id: 4
-      command: stop
-    id: onReleaseDown4
 
 action:
   - choose:
@@ -242,14 +206,16 @@ action:
             id: on1
         sequence:
           - service: light.turn_on
-            data:
+            target:
               entity_id: !input light_entity_1
+            data:
+              brightness_pct: 100
       - conditions:
           - condition: trigger
             id: off1
         sequence:
           - service: light.turn_off
-            data:
+            target:
               entity_id: !input light_entity_1
       - conditions:
           - condition: trigger
@@ -261,55 +227,48 @@ action:
                   id: onHold1
               sequence:
                 - service: light.turn_on
-                  data:
+                  target:
                     entity_id: !input light_entity_1
-                    brightness_step: 10
-                - delay: 0:00:00.020
+                  data:
+                    brightness_step_pct: 10
+                - delay:
+                    milliseconds: 500
       - conditions:
           - condition: trigger
             id: offHold1
         sequence:
           - repeat:
               while:
-                - condition: and
-                  conditions:
-                    - condition: trigger
-                      id: offHold1
-                    - condition: numeric_state
-                      entity_id: !input light_entity_1
-                      attribute: brightness
-                      above: 2
+                - condition: trigger
+                  id: offHold1
+                - condition: numeric_state
+                  entity_id: !input light_entity_1
+                  attribute: brightness
+                  above: 2
               sequence:
                 - service: light.turn_on
-                  data:
+                  target:
                     entity_id: !input light_entity_1
+                  data:
                     brightness_step_pct: -10
-                - delay: 0:00:00.020
-      - conditions:
-          - condition: trigger
-            id: onReleaseDown1
-        sequence:
-          - service: light.turn_on
-            data:
-              entity_id: !input light_entity_1
-              brightness_pct: 1
-
-      # Repeat similar action sequences for other endpoints
-      # Replace endpoint ID and light entity as needed
-
+                - delay:
+                    milliseconds: 500
+  - choose:
       - conditions:
           - condition: trigger
             id: on2
         sequence:
           - service: light.turn_on
-            data:
+            target:
               entity_id: !input light_entity_2
+            data:
+              brightness_pct: 100
       - conditions:
           - condition: trigger
             id: off2
         sequence:
           - service: light.turn_off
-            data:
+            target:
               entity_id: !input light_entity_2
       - conditions:
           - condition: trigger
@@ -321,52 +280,48 @@ action:
                   id: onHold2
               sequence:
                 - service: light.turn_on
-                  data:
+                  target:
                     entity_id: !input light_entity_2
-                    brightness_step: 10
-                - delay: 0:00:00.020
+                  data:
+                    brightness_step_pct: 10
+                - delay:
+                    milliseconds: 500
       - conditions:
           - condition: trigger
             id: offHold2
         sequence:
           - repeat:
               while:
-                - condition: and
-                  conditions:
-                    - condition: trigger
-                      id: offHold2
-                    - condition: numeric_state
-                      entity_id: !input light_entity_2
-                      attribute: brightness
-                      above: 2
+                - condition: trigger
+                  id: offHold2
+                - condition: numeric_state
+                  entity_id: !input light_entity_2
+                  attribute: brightness
+                  above: 2
               sequence:
                 - service: light.turn_on
-                  data:
+                  target:
                     entity_id: !input light_entity_2
+                  data:
                     brightness_step_pct: -10
-                - delay: 0:00:00.020
-      - conditions:
-          - condition: trigger
-            id: onReleaseDown2
-        sequence:
-          - service: light.turn_on
-            data:
-              entity_id: !input light_entity_2
-              brightness_pct: 1
-
+                - delay:
+                    milliseconds: 500
+  - choose:
       - conditions:
           - condition: trigger
             id: on3
         sequence:
           - service: light.turn_on
-            data:
+            target:
               entity_id: !input light_entity_3
+            data:
+              brightness_pct: 100
       - conditions:
           - condition: trigger
             id: off3
         sequence:
           - service: light.turn_off
-            data:
+            target:
               entity_id: !input light_entity_3
       - conditions:
           - condition: trigger
@@ -378,92 +333,46 @@ action:
                   id: onHold3
               sequence:
                 - service: light.turn_on
-                  data:
+                  target:
                     entity_id: !input light_entity_3
-                    brightness_step: 10
-                - delay: 0:00:00.020
+                  data:
+                    brightness_step_pct: 10
+                - delay:
+                    milliseconds: 500
       - conditions:
           - condition: trigger
             id: offHold3
         sequence:
           - repeat:
               while:
-                - condition: and
-                  conditions:
-                    - condition: trigger
-                      id: offHold3
-                    - condition: numeric_state
-                      entity_id: !input light_entity_3
-                      attribute: brightness
-                      above: 2
+                - condition: trigger
+                  id: offHold3
+                - condition: numeric_state
+                  entity_id: !input light_entity_3
+                  attribute: brightness
+                  above: 2
               sequence:
                 - service: light.turn_on
-                  data:
+                  target:
                     entity_id: !input light_entity_3
+                  data:
                     brightness_step_pct: -10
-                - delay: 0:00:00.020
-      - conditions:
-          - condition: trigger
-            id: onReleaseDown3
-        sequence:
-          - service: light.turn_on
-            data:
-              entity_id: !input light_entity_3
-              brightness_pct: 1
-
+                - delay:
+                    milliseconds: 500
+  - choose:
       - conditions:
           - condition: trigger
             id: on4
         sequence:
           - service: light.turn_on
-            data:
+            target:
               entity_id: !input light_entity_4
+            data:
+              brightness_pct: 100
       - conditions:
           - condition: trigger
             id: off4
         sequence:
           - service: light.turn_off
-            data:
+            target:
               entity_id: !input light_entity_4
-      - conditions:
-          - condition: trigger
-            id: onHold4
-        sequence:
-          - repeat:
-              while:
-                - condition: trigger
-                  id: onHold4
-              sequence:
-                - service: light.turn_on
-                  data:
-                    entity_id: !input light_entity_4
-                    brightness_step: 10
-                - delay: 0:00:00.020
-      - conditions:
-          - condition: trigger
-            id: offHold4
-        sequence:
-          - repeat:
-              while:
-                - condition: and
-                  conditions:
-                    - condition: trigger
-                      id: offHold4
-                    - condition: numeric_state
-                      entity_id: !input light_entity_4
-                      attribute: brightness
-                      above: 2
-              sequence:
-                - service: light.turn_on
-                  data:
-                    entity_id: !input light_entity_4
-                    brightness_step_pct: -10
-                - delay: 0:00:00.020
-      - conditions:
-          - condition: trigger
-            id: onReleaseDown4
-        sequence:
-          - service: light.turn_on
-            data:
-              entity_id: !input light_entity_4
-              brightness_pct: 1
