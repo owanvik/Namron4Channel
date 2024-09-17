@@ -128,6 +128,30 @@ blueprint:
       default: []
       selector:
         action: {}
+    custom_action_1_on_release_down:
+      name: Custom Action 1 On Release Down
+      description: Custom action to perform when endpoint 1 is released after a hold.
+      default: []
+      selector:
+        action: {}
+    custom_action_2_on_release_down:
+      name: Custom Action 2 On Release Down
+      description: Custom action to perform when endpoint 2 is released after a hold.
+      default: []
+      selector:
+        action: {}
+    custom_action_3_on_release_down:
+      name: Custom Action 3 On Release Down
+      description: Custom action to perform when endpoint 3 is released after a hold.
+      default: []
+      selector:
+        action: {}
+    custom_action_4_on_release_down:
+      name: Custom Action 4 On Release Down
+      description: Custom action to perform when endpoint 4 is released after a hold.
+      default: []
+      selector:
+        action: {}
 
 trigger:
   - platform: event
