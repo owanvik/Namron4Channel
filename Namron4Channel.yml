@@ -1,6 +1,6 @@
 blueprint:
   name: NAMRON 4 Channel ZigBee Switch
-  description: Controls lights based on ZHA events with customizable actions for each endpoint E.
+  description: Controls lights based on ZHA events with customizable actions for each endpoint.
   domain: automation
   input:
     device_id:
@@ -32,6 +32,7 @@ blueprint:
       selector:
         entity:
           domain: light
+    # Custom Actions for Endpoint 1
     custom_action_1_on:
       name: Custom Action 1 On
       description: Custom action to perform when endpoint 1 is triggered "on".
@@ -56,6 +57,13 @@ blueprint:
       default: []
       selector:
         action: {}
+    custom_action_1_on_release_down:
+      name: Custom Action 1 On Release Down
+      description: Custom action to perform when endpoint 1 is released after a hold.
+      default: []
+      selector:
+        action: {}
+    # Custom Actions for Endpoint 2
     custom_action_2_on:
       name: Custom Action 2 On
       description: Custom action to perform when endpoint 2 is triggered "on".
@@ -80,6 +88,13 @@ blueprint:
       default: []
       selector:
         action: {}
+    custom_action_2_on_release_down:
+      name: Custom Action 2 On Release Down
+      description: Custom action to perform when endpoint 2 is released after a hold.
+      default: []
+      selector:
+        action: {}
+    # Custom Actions for Endpoint 3
     custom_action_3_on:
       name: Custom Action 3 On
       description: Custom action to perform when endpoint 3 is triggered "on".
@@ -104,6 +119,13 @@ blueprint:
       default: []
       selector:
         action: {}
+    custom_action_3_on_release_down:
+      name: Custom Action 3 On Release Down
+      description: Custom action to perform when endpoint 3 is released after a hold.
+      default: []
+      selector:
+        action: {}
+    # Custom Actions for Endpoint 4
     custom_action_4_on:
       name: Custom Action 4 On
       description: Custom action to perform when endpoint 4 is triggered "on".
@@ -125,24 +147,6 @@ blueprint:
     custom_action_4_off_hold:
       name: Custom Action 4 Off Hold
       description: Custom action to perform when endpoint 4 is released from hold.
-      default: []
-      selector:
-        action: {}
-    custom_action_1_on_release_down:
-      name: Custom Action 1 On Release Down
-      description: Custom action to perform when endpoint 1 is released after a hold.
-      default: []
-      selector:
-        action: {}
-    custom_action_2_on_release_down:
-      name: Custom Action 2 On Release Down
-      description: Custom action to perform when endpoint 2 is released after a hold.
-      default: []
-      selector:
-        action: {}
-    custom_action_3_on_release_down:
-      name: Custom Action 3 On Release Down
-      description: Custom action to perform when endpoint 3 is released after a hold.
       default: []
       selector:
         action: {}
@@ -357,6 +361,7 @@ trigger:
 
 action:
   - choose:
+      # Actions for Endpoint 1
       - conditions:
           - condition: trigger
             id: on1
@@ -387,6 +392,7 @@ action:
           - condition: trigger
             id: onReleaseDown1
         sequence: !input custom_action_1_on_release_down
+      # Actions for Endpoint 2
       - conditions:
           - condition: trigger
             id: on2
@@ -417,6 +423,7 @@ action:
           - condition: trigger
             id: onReleaseDown2
         sequence: !input custom_action_2_on_release_down
+      # Actions for Endpoint 3
       - conditions:
           - condition: trigger
             id: on3
@@ -447,6 +454,7 @@ action:
           - condition: trigger
             id: onReleaseDown3
         sequence: !input custom_action_3_on_release_down
+      # Actions for Endpoint 4
       - conditions:
           - condition: trigger
             id: on4
