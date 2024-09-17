@@ -301,4 +301,133 @@ trigger:
     event_data:
       device_id: !input device
       endpoint_id: 4
-      command: move_with_on
+      command: move_with_on_off
+      args:
+        - 0
+        - 50
+    id: onHold4
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input device
+      endpoint_id: 4
+      command: stop_with_on_off
+    id: onRelease4
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input device
+      endpoint_id: 4
+      command: move
+      args:
+        - 1
+        - 50
+        - 0
+        - 0
+    id: offHold4
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input device
+      endpoint_id: 4
+      command: stop
+    id: onReleaseDown4
+
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: on1
+          - condition: template
+            value_template: "{{ custom_action_1_on | length > 0 }}"
+        sequence: !input custom_action_1_on
+      - conditions:
+          - condition: trigger
+            id: off1
+          - condition: template
+            value_template: "{{ custom_action_1_off | length > 0 }}"
+        sequence: !input custom_action_1_off
+      - conditions:
+          - condition: trigger
+            id: onHold1
+          - condition: template
+            value_template: "{{ custom_action_1_on_hold | length > 0 }}"
+        sequence: !input custom_action_1_on_hold
+      - conditions:
+          - condition: trigger
+            id: onRelease1
+          - condition: template
+            value_template: "{{ custom_action_1_off_hold | length > 0 }}"
+        sequence: !input custom_action_1_off_hold
+      - conditions:
+          - condition: trigger
+            id: on2
+          - condition: template
+            value_template: "{{ custom_action_2_on | length > 0 }}"
+        sequence: !input custom_action_2_on
+      - conditions:
+          - condition: trigger
+            id: off2
+          - condition: template
+            value_template: "{{ custom_action_2_off | length > 0 }}"
+        sequence: !input custom_action_2_off
+      - conditions:
+          - condition: trigger
+            id: onHold2
+          - condition: template
+            value_template: "{{ custom_action_2_on_hold | length > 0 }}"
+        sequence: !input custom_action_2_on_hold
+      - conditions:
+          - condition: trigger
+            id: onRelease2
+          - condition: template
+            value_template: "{{ custom_action_2_off_hold | length > 0 }}"
+        sequence: !input custom_action_2_off_hold
+      - conditions:
+          - condition: trigger
+            id: on3
+          - condition: template
+            value_template: "{{ custom_action_3_on | length > 0 }}"
+        sequence: !input custom_action_3_on
+      - conditions:
+          - condition: trigger
+            id: off3
+          - condition: template
+            value_template: "{{ custom_action_3_off | length > 0 }}"
+        sequence: !input custom_action_3_off
+      - conditions:
+          - condition: trigger
+            id: onHold3
+          - condition: template
+            value_template: "{{ custom_action_3_on_hold | length > 0 }}"
+        sequence: !input custom_action_3_on_hold
+      - conditions:
+          - condition: trigger
+            id: onRelease3
+          - condition: template
+            value_template: "{{ custom_action_3_off_hold | length > 0 }}"
+        sequence: !input custom_action_3_off_hold
+      - conditions:
+          - condition: trigger
+            id: on4
+          - condition: template
+            value_template: "{{ custom_action_4_on | length > 0 }}"
+        sequence: !input custom_action_4_on
+      - conditions:
+          - condition: trigger
+            id: off4
+          - condition: template
+            value_template: "{{ custom_action_4_off | length > 0 }}"
+        sequence: !input custom_action_4_off
+      - conditions:
+          - condition: trigger
+            id: onHold4
+          - condition: template
+            value_template: "{{ custom_action_4_on_hold | length > 0 }}"
+        sequence: !input custom_action_4_on_hold
+      - conditions:
+          - condition: trigger
+            id: onRelease4
+          - condition: template
+            value_template: "{{ custom_action_4_off_hold | length > 0 }}"
+        sequence: !input custom_action_4_off_hold
