@@ -1,86 +1,131 @@
 blueprint:
-  name: "Customizable 4-Button Namron Switch"
-  description: "Handles actions for a 4-button Namron switch, with the possibility of custom actions per endpoint."
+  name: Customizable Light Control
+  description: Controls lights based on ZHA events with customizable actions for each endpoint.
   domain: automation
   input:
-    switch_device:
-      name: Namron Switch
-      description: "Choose your Namron switch"
+    device:
+      name: ZHA Device
+      description: "Choose your ZHA device."
       selector:
         device:
           integration: zha
-          manufacturer: NAMRON AS
-
-        
-    light_entity1:
+    light_entity_1:
       name: Light Entity 1
       description: The light entity controlled by endpoint 1.
       selector:
         entity:
           domain: light
-    light_entity2:
+    light_entity_2:
       name: Light Entity 2
       description: The light entity controlled by endpoint 2.
       selector:
         entity:
           domain: light
-    light_entity3:
+    light_entity_3:
       name: Light Entity 3
       description: The light entity controlled by endpoint 3.
       selector:
         entity:
           domain: light
-    light_entity4:
+    light_entity_4:
       name: Light Entity 4
       description: The light entity controlled by endpoint 4.
       selector:
         entity:
           domain: light
     custom_action_1_on:
-      name: Custom Action for Endpoint 1 On
-      description: "Custom action to execute when button 1 is turned on."
+      name: Custom Action 1 On
+      description: Custom action to perform when endpoint 1 is triggered "on".
       default: []
       selector:
         action: {}
     custom_action_1_off:
-      name: Custom Action for Endpoint 1 Off
-      description: "Custom action to execute when button 1 is turned off."
+      name: Custom Action 1 Off
+      description: Custom action to perform when endpoint 1 is triggered "off".
+      default: []
+      selector:
+        action: {}
+    custom_action_1_on_hold:
+      name: Custom Action 1 On Hold
+      description: Custom action to perform when endpoint 1 is held.
+      default: []
+      selector:
+        action: {}
+    custom_action_1_off_hold:
+      name: Custom Action 1 Off Hold
+      description: Custom action to perform when endpoint 1 is released from hold.
       default: []
       selector:
         action: {}
     custom_action_2_on:
-      name: Custom Action for Endpoint 2 On
-      description: "Custom action to execute when button 2 is turned on."
+      name: Custom Action 2 On
+      description: Custom action to perform when endpoint 2 is triggered "on".
       default: []
       selector:
         action: {}
     custom_action_2_off:
-      name: Custom Action for Endpoint 2 Off
-      description: "Custom action to execute when button 2 is turned off."
+      name: Custom Action 2 Off
+      description: Custom action to perform when endpoint 2 is triggered "off".
+      default: []
+      selector:
+        action: {}
+    custom_action_2_on_hold:
+      name: Custom Action 2 On Hold
+      description: Custom action to perform when endpoint 2 is held.
+      default: []
+      selector:
+        action: {}
+    custom_action_2_off_hold:
+      name: Custom Action 2 Off Hold
+      description: Custom action to perform when endpoint 2 is released from hold.
       default: []
       selector:
         action: {}
     custom_action_3_on:
-      name: Custom Action for Endpoint 3 On
-      description: "Custom action to execute when button 3 is turned on."
+      name: Custom Action 3 On
+      description: Custom action to perform when endpoint 3 is triggered "on".
       default: []
       selector:
         action: {}
     custom_action_3_off:
-      name: Custom Action for Endpoint 3 Off
-      description: "Custom action to execute when button 3 is turned off."
+      name: Custom Action 3 Off
+      description: Custom action to perform when endpoint 3 is triggered "off".
+      default: []
+      selector:
+        action: {}
+    custom_action_3_on_hold:
+      name: Custom Action 3 On Hold
+      description: Custom action to perform when endpoint 3 is held.
+      default: []
+      selector:
+        action: {}
+    custom_action_3_off_hold:
+      name: Custom Action 3 Off Hold
+      description: Custom action to perform when endpoint 3 is released from hold.
       default: []
       selector:
         action: {}
     custom_action_4_on:
-      name: Custom Action for Endpoint 4 On
-      description: "Custom action to execute when button 4 is turned on."
+      name: Custom Action 4 On
+      description: Custom action to perform when endpoint 4 is triggered "on".
       default: []
       selector:
         action: {}
     custom_action_4_off:
-      name: Custom Action for Endpoint 4 Off
-      description: "Custom action to execute when button 4 is turned off."
+      name: Custom Action 4 Off
+      description: Custom action to perform when endpoint 4 is triggered "off".
+      default: []
+      selector:
+        action: {}
+    custom_action_4_on_hold:
+      name: Custom Action 4 On Hold
+      description: Custom action to perform when endpoint 4 is held.
+      default: []
+      selector:
+        action: {}
+    custom_action_4_off_hold:
+      name: Custom Action 4 Off Hold
+      description: Custom action to perform when endpoint 4 is released from hold.
       default: []
       selector:
         action: {}
@@ -89,165 +134,170 @@ trigger:
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input "device"
+      device_id: !input device
       endpoint_id: 1
       command: "on"
     id: on1
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input "device"
+      device_id: !input device
       endpoint_id: 1
       command: "off"
     id: off1
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input "device"
+      device_id: !input device
+      endpoint_id: 1
+      command: move_with_on_off
+      args:
+        - 0
+        - 50
+    id: onHold1
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input device
+      endpoint_id: 1
+      command: stop_with_on_off
+    id: onRelease1
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input device
+      endpoint_id: 1
+      command: move
+      args:
+        - 1
+        - 50
+        - 0
+        - 0
+    id: offHold1
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input device
+      endpoint_id: 1
+      command: stop
+    id: onReleaseDown1
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input device
       endpoint_id: 2
       command: "on"
     id: on2
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input "device"
+      device_id: !input device
       endpoint_id: 2
       command: "off"
     id: off2
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input "device"
+      device_id: !input device
+      endpoint_id: 2
+      command: move_with_on_off
+      args:
+        - 0
+        - 50
+    id: onHold2
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input device
+      endpoint_id: 2
+      command: stop_with_on_off
+    id: onRelease2
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input device
+      endpoint_id: 2
+      command: move
+      args:
+        - 1
+        - 50
+        - 0
+        - 0
+    id: offHold2
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input device
+      endpoint_id: 2
+      command: stop
+    id: onReleaseDown2
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input device
       endpoint_id: 3
       command: "on"
     id: on3
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input "device"
+      device_id: !input device
       endpoint_id: 3
       command: "off"
     id: off3
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input "device"
+      device_id: !input device
+      endpoint_id: 3
+      command: move_with_on_off
+      args:
+        - 0
+        - 50
+    id: onHold3
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input device
+      endpoint_id: 3
+      command: stop_with_on_off
+    id: onRelease3
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input device
+      endpoint_id: 3
+      command: move
+      args:
+        - 1
+        - 50
+        - 0
+        - 0
+    id: offHold3
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input device
+      endpoint_id: 3
+      command: stop
+    id: onReleaseDown3
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input device
       endpoint_id: 4
       command: "on"
     id: on4
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input "device"
+      device_id: !input device
       endpoint_id: 4
       command: "off"
     id: off4
-
-action:
-  - choose:
-      - conditions:
-          - condition: trigger
-            id: on1
-        sequence:
-          - choose:
-              - conditions:
-                  - condition: template
-                    value_template: "{{ (custom_action_1_on | length) > 0 }}"
-                sequence: !input custom_action_1_on
-            default:
-                - service: light.turn_on
-                  target:
-                    entity_id: light.entity1
-      - conditions:
-          - condition: trigger
-            id: off1
-        sequence:
-          - choose:
-              - conditions:
-                  - condition: template
-                    value_template: "{{ (custom_action_1_off | length) > 0 }}"
-                sequence: !input custom_action_1_off
-            default:
-                - service: light.turn_off
-                  target:
-                    entity_id: light.entity1
-      - conditions:
-          - condition: trigger
-            id: on2
-        sequence:
-          - choose:
-              - conditions:
-                  - condition: template
-                    value_template: "{{ (custom_action_2_on | length) > 0 }}"
-                sequence: !input custom_action_2_on
-            default:
-                - service: light.turn_on
-                  target:
-                    entity_id: light.entity2
-      - conditions:
-          - condition: trigger
-            id: off2
-        sequence:
-          - choose:
-              - conditions:
-                  - condition: template
-                    value_template: "{{ (custom_action_2_off | length) > 0 }}"
-                sequence: !input custom_action_2_off
-            default:
-                - service: light.turn_off
-                  target:
-                    entity_id: light.entity2
-      - conditions:
-          - condition: trigger
-            id: on3
-        sequence:
-          - choose:
-              - conditions:
-                  - condition: template
-                    value_template: "{{ (custom_action_3_on | length) > 0 }}"
-                sequence: !input custom_action_3_on
-            default:
-                - service: light.turn_on
-                  target:
-                    entity_id: light.entity3
-      - conditions:
-          - condition: trigger
-            id: off3
-        sequence:
-          - choose:
-              - conditions:
-                  - condition: template
-                    value_template: "{{ (custom_action_3_off | length) > 0 }}"
-                sequence: !input custom_action_3_off
-            default:
-                - service: light.turn_off
-                  target:
-                    entity_id: light.entity3
-      - conditions:
-          - condition: trigger
-            id: on4
-        sequence:
-          - choose:
-              - conditions:
-                  - condition: template
-                    value_template: "{{ (custom_action_4_on | length) > 0 }}"
-                sequence: !input custom_action_4_on
-            default:
-                - service: light.turn_on
-                  target:
-                    entity_id: light.entity4
-      - conditions:
-          - condition: trigger
-            id: off4
-        sequence:
-          - choose:
-              - conditions:
-                  - condition: template
-                    value_template: "{{ (custom_action_4_off | length) > 0 }}"
-                sequence: !input custom_action_4_off
-            default:
-                - service: light.turn_off
-                  target:
-                    entity_id: light.entity4
-
-mode: restart
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input device
+      endpoint_id: 4
+      command: move_with_on
