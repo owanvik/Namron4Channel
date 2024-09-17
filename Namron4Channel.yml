@@ -3,13 +3,11 @@ blueprint:
   description: Controls lights based on ZHA events with customizable actions for each endpoint.
   domain: automation
   input:
-    device:
-      name: ZHA Device
-      description: "Choose your ZHA device."
+    device_id:
+      name: Device ID
+      description: "Specify the device ID for the ZHA device."
       selector:
-        device:
-          integration: zha
-          manufacturer: NAMRON AS
+        text:
     light_entity_1:
       name: Light Entity 1
       description: The light entity controlled by endpoint 1.
@@ -135,21 +133,21 @@ trigger:
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input device
+      device_id: !input device_id
       endpoint_id: 1
       command: "on"
     id: on1
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input device
+      device_id: !input device_id
       endpoint_id: 1
       command: "off"
     id: off1
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input device
+      device_id: !input device_id
       endpoint_id: 1
       command: move_with_on_off
       args:
@@ -159,14 +157,14 @@ trigger:
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input device
+      device_id: !input device_id
       endpoint_id: 1
       command: stop_with_on_off
     id: onRelease1
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input device
+      device_id: !input device_id
       endpoint_id: 1
       command: move
       args:
@@ -178,28 +176,28 @@ trigger:
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input device
+      device_id: !input device_id
       endpoint_id: 1
       command: stop
     id: onReleaseDown1
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input device
+      device_id: !input device_id
       endpoint_id: 2
       command: "on"
     id: on2
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input device
+      device_id: !input device_id
       endpoint_id: 2
       command: "off"
     id: off2
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input device
+      device_id: !input device_id
       endpoint_id: 2
       command: move_with_on_off
       args:
@@ -209,14 +207,14 @@ trigger:
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input device
+      device_id: !input device_id
       endpoint_id: 2
       command: stop_with_on_off
     id: onRelease2
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input device
+      device_id: !input device_id
       endpoint_id: 2
       command: move
       args:
@@ -228,28 +226,28 @@ trigger:
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input device
+      device_id: !input device_id
       endpoint_id: 2
       command: stop
     id: onReleaseDown2
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input device
+      device_id: !input device_id
       endpoint_id: 3
       command: "on"
     id: on3
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input device
+      device_id: !input device_id
       endpoint_id: 3
       command: "off"
     id: off3
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input device
+      device_id: !input device_id
       endpoint_id: 3
       command: move_with_on_off
       args:
@@ -259,14 +257,14 @@ trigger:
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input device
+      device_id: !input device_id
       endpoint_id: 3
       command: stop_with_on_off
     id: onRelease3
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input device
+      device_id: !input device_id
       endpoint_id: 3
       command: move
       args:
@@ -278,28 +276,28 @@ trigger:
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input device
+      device_id: !input device_id
       endpoint_id: 3
       command: stop
     id: onReleaseDown3
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input device
+      device_id: !input device_id
       endpoint_id: 4
       command: "on"
     id: on4
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input device
+      device_id: !input device_id
       endpoint_id: 4
       command: "off"
     id: off4
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input device
+      device_id: !input device_id
       endpoint_id: 4
       command: move_with_on_off
       args:
@@ -309,14 +307,14 @@ trigger:
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input device
+      device_id: !input device_id
       endpoint_id: 4
       command: stop_with_on_off
     id: onRelease4
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input device
+      device_id: !input device_id
       endpoint_id: 4
       command: move
       args:
@@ -328,7 +326,7 @@ trigger:
   - platform: event
     event_type: zha_event
     event_data:
-      device_id: !input device
+      device_id: !input device_id
       endpoint_id: 4
       command: stop
     id: onReleaseDown4
@@ -338,96 +336,121 @@ action:
       - conditions:
           - condition: trigger
             id: on1
-          - condition: template
-            value_template: "{{ custom_action_1_on | length > 0 }}"
+          - condition: state
+            entity_id: !input light_entity_1
+            state: "off"
         sequence: !input custom_action_1_on
       - conditions:
           - condition: trigger
             id: off1
-          - condition: template
-            value_template: "{{ custom_action_1_off | length > 0 }}"
+          - condition: state
+            entity_id: !input light_entity_1
+            state: "on"
         sequence: !input custom_action_1_off
       - conditions:
           - condition: trigger
             id: onHold1
-          - condition: template
-            value_template: "{{ custom_action_1_on_hold | length > 0 }}"
         sequence: !input custom_action_1_on_hold
       - conditions:
           - condition: trigger
             id: onRelease1
-          - condition: template
-            value_template: "{{ custom_action_1_off_hold | length > 0 }}"
         sequence: !input custom_action_1_off_hold
       - conditions:
           - condition: trigger
+            id: offHold1
+        sequence: !input custom_action_1_off_hold
+      - conditions:
+          - condition: trigger
+            id: onReleaseDown1
+        sequence: !input custom_action_1_on_release_down
+      - conditions:
+          - condition: trigger
             id: on2
-          - condition: template
-            value_template: "{{ custom_action_2_on | length > 0 }}"
+          - condition: state
+            entity_id: !input light_entity_2
+            state: "off"
         sequence: !input custom_action_2_on
       - conditions:
           - condition: trigger
             id: off2
-          - condition: template
-            value_template: "{{ custom_action_2_off | length > 0 }}"
+          - condition: state
+            entity_id: !input light_entity_2
+            state: "on"
         sequence: !input custom_action_2_off
       - conditions:
           - condition: trigger
             id: onHold2
-          - condition: template
-            value_template: "{{ custom_action_2_on_hold | length > 0 }}"
         sequence: !input custom_action_2_on_hold
       - conditions:
           - condition: trigger
             id: onRelease2
-          - condition: template
-            value_template: "{{ custom_action_2_off_hold | length > 0 }}"
         sequence: !input custom_action_2_off_hold
       - conditions:
           - condition: trigger
+            id: offHold2
+        sequence: !input custom_action_2_off_hold
+      - conditions:
+          - condition: trigger
+            id: onReleaseDown2
+        sequence: !input custom_action_2_on_release_down
+      - conditions:
+          - condition: trigger
             id: on3
-          - condition: template
-            value_template: "{{ custom_action_3_on | length > 0 }}"
+          - condition: state
+            entity_id: !input light_entity_3
+            state: "off"
         sequence: !input custom_action_3_on
       - conditions:
           - condition: trigger
             id: off3
-          - condition: template
-            value_template: "{{ custom_action_3_off | length > 0 }}"
+          - condition: state
+            entity_id: !input light_entity_3
+            state: "on"
         sequence: !input custom_action_3_off
       - conditions:
           - condition: trigger
             id: onHold3
-          - condition: template
-            value_template: "{{ custom_action_3_on_hold | length > 0 }}"
         sequence: !input custom_action_3_on_hold
       - conditions:
           - condition: trigger
             id: onRelease3
-          - condition: template
-            value_template: "{{ custom_action_3_off_hold | length > 0 }}"
         sequence: !input custom_action_3_off_hold
       - conditions:
           - condition: trigger
+            id: offHold3
+        sequence: !input custom_action_3_off_hold
+      - conditions:
+          - condition: trigger
+            id: onReleaseDown3
+        sequence: !input custom_action_3_on_release_down
+      - conditions:
+          - condition: trigger
             id: on4
-          - condition: template
-            value_template: "{{ custom_action_4_on | length > 0 }}"
+          - condition: state
+            entity_id: !input light_entity_4
+            state: "off"
         sequence: !input custom_action_4_on
       - conditions:
           - condition: trigger
             id: off4
-          - condition: template
-            value_template: "{{ custom_action_4_off | length > 0 }}"
+          - condition: state
+            entity_id: !input light_entity_4
+            state: "on"
         sequence: !input custom_action_4_off
       - conditions:
           - condition: trigger
             id: onHold4
-          - condition: template
-            value_template: "{{ custom_action_4_on_hold | length > 0 }}"
         sequence: !input custom_action_4_on_hold
       - conditions:
           - condition: trigger
             id: onRelease4
-          - condition: template
-            value_template: "{{ custom_action_4_off_hold | length > 0 }}"
         sequence: !input custom_action_4_off_hold
+      - conditions:
+          - condition: trigger
+            id: offHold4
+        sequence: !input custom_action_4_off_hold
+      - conditions:
+          - condition: trigger
+            id: onReleaseDown4
+        sequence: !input custom_action_4_on_release_down
+    default: []
