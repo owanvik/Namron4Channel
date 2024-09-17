@@ -1,132 +1,103 @@
 blueprint:
-  name: Customizable Light Control
-  description: Controls lights based on ZHA events with customizable actions for each endpoint.
+  name: Namron Switch Automation
+  description: Automate actions based on events from a Namron switch.
   domain: automation
   input:
     device:
-      name: ZHA Device
-      description: "Choose your ZHA device."
+      name: Namron Switch
+      description: "Choose your Namron switch"
       selector:
         device:
           integration: zha
-    light_entity_1:
-      name: Light Entity 1
-      description: The light entity controlled by endpoint 1.
+    light_entities:
+      name: Light Entities
+      description: "Select the light entities to control"
       selector:
-        entity:
-          domain: light
-    light_entity_2:
-      name: Light Entity 2
-      description: The light entity controlled by endpoint 2.
-      selector:
-        entity:
-          domain: light
-    light_entity_3:
-      name: Light Entity 3
-      description: The light entity controlled by endpoint 3.
-      selector:
-        entity:
-          domain: light
-    light_entity_4:
-      name: Light Entity 4
-      description: The light entity controlled by endpoint 4.
-      selector:
-        entity:
-          domain: light
+        target:
+          entity:
+            domain: light
+    # Custom actions for endpoint 1
     custom_action_1_on:
       name: Custom Action 1 On
-      description: Custom action to perform when endpoint 1 is triggered "on".
-      default: []
+      description: "Custom action to trigger when endpoint 1 is turned on"
       selector:
         action: {}
     custom_action_1_off:
       name: Custom Action 1 Off
-      description: Custom action to perform when endpoint 1 is triggered "off".
-      default: []
+      description: "Custom action to trigger when endpoint 1 is turned off"
       selector:
         action: {}
     custom_action_1_on_hold:
       name: Custom Action 1 On Hold
-      description: Custom action to perform when endpoint 1 is held.
-      default: []
+      description: "Custom action to trigger when endpoint 1 is held down"
       selector:
         action: {}
     custom_action_1_off_hold:
       name: Custom Action 1 Off Hold
-      description: Custom action to perform when endpoint 1 is released from hold.
-      default: []
+      description: "Custom action to trigger when endpoint 1 is held down in the off state"
       selector:
         action: {}
+    # Custom actions for endpoint 2
     custom_action_2_on:
       name: Custom Action 2 On
-      description: Custom action to perform when endpoint 2 is triggered "on".
-      default: []
+      description: "Custom action to trigger when endpoint 2 is turned on"
       selector:
         action: {}
     custom_action_2_off:
       name: Custom Action 2 Off
-      description: Custom action to perform when endpoint 2 is triggered "off".
-      default: []
+      description: "Custom action to trigger when endpoint 2 is turned off"
       selector:
         action: {}
     custom_action_2_on_hold:
       name: Custom Action 2 On Hold
-      description: Custom action to perform when endpoint 2 is held.
-      default: []
+      description: "Custom action to trigger when endpoint 2 is held down"
       selector:
         action: {}
     custom_action_2_off_hold:
       name: Custom Action 2 Off Hold
-      description: Custom action to perform when endpoint 2 is released from hold.
-      default: []
+      description: "Custom action to trigger when endpoint 2 is held down in the off state"
       selector:
         action: {}
+    # Custom actions for endpoint 3
     custom_action_3_on:
       name: Custom Action 3 On
-      description: Custom action to perform when endpoint 3 is triggered "on".
-      default: []
+      description: "Custom action to trigger when endpoint 3 is turned on"
       selector:
         action: {}
     custom_action_3_off:
       name: Custom Action 3 Off
-      description: Custom action to perform when endpoint 3 is triggered "off".
-      default: []
+      description: "Custom action to trigger when endpoint 3 is turned off"
       selector:
         action: {}
     custom_action_3_on_hold:
       name: Custom Action 3 On Hold
-      description: Custom action to perform when endpoint 3 is held.
-      default: []
+      description: "Custom action to trigger when endpoint 3 is held down"
       selector:
         action: {}
     custom_action_3_off_hold:
       name: Custom Action 3 Off Hold
-      description: Custom action to perform when endpoint 3 is released from hold.
-      default: []
+      description: "Custom action to trigger when endpoint 3 is held down in the off state"
       selector:
         action: {}
+    # Custom actions for endpoint 4
     custom_action_4_on:
       name: Custom Action 4 On
-      description: Custom action to perform when endpoint 4 is triggered "on".
-      default: []
+      description: "Custom action to trigger when endpoint 4 is turned on"
       selector:
         action: {}
     custom_action_4_off:
       name: Custom Action 4 Off
-      description: Custom action to perform when endpoint 4 is triggered "off".
-      default: []
+      description: "Custom action to trigger when endpoint 4 is turned off"
       selector:
         action: {}
     custom_action_4_on_hold:
       name: Custom Action 4 On Hold
-      description: Custom action to perform when endpoint 4 is held.
-      default: []
+      description: "Custom action to trigger when endpoint 4 is held down"
       selector:
         action: {}
     custom_action_4_off_hold:
       name: Custom Action 4 Off Hold
-      description: Custom action to perform when endpoint 4 is released from hold.
-      default: []
+      description: "Custom action to trigger when endpoint 4 is held down in the off state"
       selector:
         action: {}
 
@@ -161,26 +132,7 @@ trigger:
       device_id: !input device
       endpoint_id: 1
       command: stop_with_on_off
-    id: onRelease1
-  - platform: event
-    event_type: zha_event
-    event_data:
-      device_id: !input device
-      endpoint_id: 1
-      command: move
-      args:
-        - 1
-        - 50
-        - 0
-        - 0
     id: offHold1
-  - platform: event
-    event_type: zha_event
-    event_data:
-      device_id: !input device
-      endpoint_id: 1
-      command: stop
-    id: onReleaseDown1
   - platform: event
     event_type: zha_event
     event_data:
@@ -211,26 +163,7 @@ trigger:
       device_id: !input device
       endpoint_id: 2
       command: stop_with_on_off
-    id: onRelease2
-  - platform: event
-    event_type: zha_event
-    event_data:
-      device_id: !input device
-      endpoint_id: 2
-      command: move
-      args:
-        - 1
-        - 50
-        - 0
-        - 0
     id: offHold2
-  - platform: event
-    event_type: zha_event
-    event_data:
-      device_id: !input device
-      endpoint_id: 2
-      command: stop
-    id: onReleaseDown2
   - platform: event
     event_type: zha_event
     event_data:
@@ -261,26 +194,7 @@ trigger:
       device_id: !input device
       endpoint_id: 3
       command: stop_with_on_off
-    id: onRelease3
-  - platform: event
-    event_type: zha_event
-    event_data:
-      device_id: !input device
-      endpoint_id: 3
-      command: move
-      args:
-        - 1
-        - 50
-        - 0
-        - 0
     id: offHold3
-  - platform: event
-    event_type: zha_event
-    event_data:
-      device_id: !input device
-      endpoint_id: 3
-      command: stop
-    id: onReleaseDown3
   - platform: event
     event_type: zha_event
     event_data:
@@ -300,4 +214,191 @@ trigger:
     event_data:
       device_id: !input device
       endpoint_id: 4
-      command: move_with_on
+      command: move_with_on_off
+      args:
+        - 0
+        - 50
+    id: onHold4
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input device
+      endpoint_id: 4
+      command: stop_with_on_off
+    id: offHold4
+
+condition: []
+
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: on1
+        sequence:
+          - if:
+              - condition: template
+                value_template: "{{ input.custom_action_1_on | length > 0 }}"
+            then:
+              - service: !input custom_action_1_on
+          - if:
+              - condition: template
+                value_template: "{{ input.custom_action_1_off | length > 0 }}"
+            then:
+              - service: !input custom_action_1_off
+      - conditions:
+          - condition: trigger
+            id: off1
+        sequence:
+          - if:
+              - condition: template
+                value_template: "{{ input.custom_action_1_off | length > 0 }}"
+            then:
+              - service: !input custom_action_1_off
+      - conditions:
+          - condition: trigger
+            id: onHold1
+        sequence:
+          - if:
+              - condition: template
+                value_template: "{{ input.custom_action_1_on_hold | length > 0 }}"
+            then:
+              - service: !input custom_action_1_on_hold
+          - if:
+              - condition: template
+                value_template: "{{ input.custom_action_1_off_hold | length > 0 }}"
+            then:
+              - service: !input custom_action_1_off_hold
+      - conditions:
+          - condition: trigger
+            id: offHold1
+        sequence:
+          - if:
+              - condition: template
+                value_template: "{{ input.custom_action_1_off_hold | length > 0 }}"
+            then:
+              - service: !input custom_action_1_off_hold
+      - conditions:
+          - condition: trigger
+            id: on2
+        sequence:
+          - if:
+              - condition: template
+                value_template: "{{ input.custom_action_2_on | length > 0 }}"
+            then:
+              - service: !input custom_action_2_on
+      - conditions:
+          - condition: trigger
+            id: off2
+        sequence:
+          - if:
+              - condition: template
+                value_template: "{{ input.custom_action_2_off | length > 0 }}"
+            then:
+              - service: !input custom_action_2_off
+      - conditions:
+          - condition: trigger
+            id: onHold2
+        sequence:
+          - if:
+              - condition: template
+                value_template: "{{ input.custom_action_2_on_hold | length > 0 }}"
+            then:
+              - service: !input custom_action_2_on_hold
+          - if:
+              - condition: template
+                value_template: "{{ input.custom_action_2_off_hold | length > 0 }}"
+            then:
+              - service: !input custom_action_2_off_hold
+      - conditions:
+          - condition: trigger
+            id: offHold2
+        sequence:
+          - if:
+              - condition: template
+                value_template: "{{ input.custom_action_2_off_hold | length > 0 }}"
+            then:
+              - service: !input custom_action_2_off_hold
+      - conditions:
+          - condition: trigger
+            id: on3
+        sequence:
+          - if:
+              - condition: template
+                value_template: "{{ input.custom_action_3_on | length > 0 }}"
+            then:
+              - service: !input custom_action_3_on
+      - conditions:
+          - condition: trigger
+            id: off3
+        sequence:
+          - if:
+              - condition: template
+                value_template: "{{ input.custom_action_3_off | length > 0 }}"
+            then:
+              - service: !input custom_action_3_off
+      - conditions:
+          - condition: trigger
+            id: onHold3
+        sequence:
+          - if:
+              - condition: template
+                value_template: "{{ input.custom_action_3_on_hold | length > 0 }}"
+            then:
+              - service: !input custom_action_3_on_hold
+          - if:
+              - condition: template
+                value_template: "{{ input.custom_action_3_off_hold | length > 0 }}"
+            then:
+              - service: !input custom_action_3_off_hold
+      - conditions:
+          - condition: trigger
+            id: offHold3
+        sequence:
+          - if:
+              - condition: template
+                value_template: "{{ input.custom_action_3_off_hold | length > 0 }}"
+            then:
+              - service: !input custom_action_3_off_hold
+      - conditions:
+          - condition: trigger
+            id: on4
+        sequence:
+          - if:
+              - condition: template
+                value_template: "{{ input.custom_action_4_on | length > 0 }}"
+            then:
+              - service: !input custom_action_4_on
+      - conditions:
+          - condition: trigger
+            id: off4
+        sequence:
+          - if:
+              - condition: template
+                value_template: "{{ input.custom_action_4_off | length > 0 }}"
+            then:
+              - service: !input custom_action_4_off
+      - conditions:
+          - condition: trigger
+            id: onHold4
+        sequence:
+          - if:
+              - condition: template
+                value_template: "{{ input.custom_action_4_on_hold | length > 0 }}"
+            then:
+              - service: !input custom_action_4_on_hold
+          - if:
+              - condition: template
+                value_template: "{{ input.custom_action_4_off_hold | length > 0 }}"
+            then:
+              - service: !input custom_action_4_off_hold
+      - conditions:
+          - condition: trigger
+            id: offHold4
+        sequence:
+          - if:
+              - condition: template
+                value_template: "{{ input.custom_action_4_off_hold | length > 0 }}"
+            then:
+              - service: !input custom_action_4_off_hold
+
+mode: restart
