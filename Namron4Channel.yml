@@ -7,7 +7,7 @@ blueprint:
       name: Device ID
       description: "Enter the device ID for your Namron switch"
       selector:
-        text: {}
+        text: "{}"
 
         
     light_entity1:
