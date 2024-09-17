@@ -1,6 +1,6 @@
 blueprint:
   name: "Customizable 4-Button Namron Switch"
-  description: "Handles actions for a 4-button Namron switch, with the possibility of custom actions per endpoint. Adding custom actions disables the default action."
+  description: "Handles actions for a 4-button Namron switch, with the possibility of custom actions per endpoint."
   domain: automation
   input:
     device:
@@ -126,13 +126,12 @@ action:
           - choose:
               - conditions:
                   - condition: template
-                    value_template: "{{ input.custom_action_1_on | length > 0 }}"
+                    value_template: "{{ (custom_action_1_on | length) > 0 }}"
                 sequence: !input custom_action_1_on
-                 default:
+            default:
                 - service: light.turn_on
                   target:
                     entity_id: light.entity1
-
       - conditions:
           - condition: trigger
             id: off1
@@ -140,13 +139,12 @@ action:
           - choose:
               - conditions:
                   - condition: template
-                    value_template: "{{ input.custom_action_1_off | length > 0 }}"
+                    value_template: "{{ (custom_action_1_off | length) > 0 }}"
                 sequence: !input custom_action_1_off
-                 default:
+            default:
                 - service: light.turn_off
                   target:
                     entity_id: light.entity1
-
       - conditions:
           - condition: trigger
             id: on2
@@ -154,13 +152,12 @@ action:
           - choose:
               - conditions:
                   - condition: template
-                    value_template: "{{ input.custom_action_2_on | length > 0 }}"
+                    value_template: "{{ (custom_action_2_on | length) > 0 }}"
                 sequence: !input custom_action_2_on
-                  default:
+            default:
                 - service: light.turn_on
                   target:
                     entity_id: light.entity2
-
       - conditions:
           - condition: trigger
             id: off2
@@ -168,13 +165,12 @@ action:
           - choose:
               - conditions:
                   - condition: template
-                    value_template: "{{ input.custom_action_2_off | length > 0 }}"
+                    value_template: "{{ (custom_action_2_off | length) > 0 }}"
                 sequence: !input custom_action_2_off
-                  default:
+            default:
                 - service: light.turn_off
                   target:
                     entity_id: light.entity2
-
       - conditions:
           - condition: trigger
             id: on3
@@ -182,13 +178,12 @@ action:
           - choose:
               - conditions:
                   - condition: template
-                    value_template: "{{ input.custom_action_3_on | length > 0 }}"
+                    value_template: "{{ (custom_action_3_on | length) > 0 }}"
                 sequence: !input custom_action_3_on
-                 default:
+            default:
                 - service: light.turn_on
                   target:
                     entity_id: light.entity3
-
       - conditions:
           - condition: trigger
             id: off3
@@ -196,13 +191,12 @@ action:
           - choose:
               - conditions:
                   - condition: template
-                    value_template: "{{ input.custom_action_3_off | length > 0 }}"
+                    value_template: "{{ (custom_action_3_off | length) > 0 }}"
                 sequence: !input custom_action_3_off
-                 default:
+            default:
                 - service: light.turn_off
                   target:
                     entity_id: light.entity3
-
       - conditions:
           - condition: trigger
             id: on4
@@ -210,13 +204,12 @@ action:
           - choose:
               - conditions:
                   - condition: template
-                    value_template: "{{ input.custom_action_4_on | length > 0 }}"
+                    value_template: "{{ (custom_action_4_on | length) > 0 }}"
                 sequence: !input custom_action_4_on
-                  default:
+            default:
                 - service: light.turn_on
                   target:
                     entity_id: light.entity4
-
       - conditions:
           - condition: trigger
             id: off4
@@ -224,9 +217,9 @@ action:
           - choose:
               - conditions:
                   - condition: template
-                    value_template: "{{ input.custom_action_4_off | length > 0 }}"
+                    value_template: "{{ (custom_action_4_off | length) > 0 }}"
                 sequence: !input custom_action_4_off
-                 default:
+            default:
                 - service: light.turn_off
                   target:
                     entity_id: light.entity4
