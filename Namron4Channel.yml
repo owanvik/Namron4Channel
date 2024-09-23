@@ -1,5 +1,5 @@
 blueprint:
-  name: NAMRON 4 Channel ZigBee Switch v2.3.2
+  name: NAMRON 4 Channel ZigBee Switch v2.3.4
   description: Controls lights based on ZHA events for each endpoint.
   domain: automation
   input:
@@ -8,9 +8,35 @@ blueprint:
       description: The device ID of the ZHA switch.
       selector:
         text: {}
+    device_id2:
+      name: Switch
+      description: The switch.
+      selector:
+        entity:
+          integration: zha
+          domain: sensor
+
     light_entity_1:
       name: Light Entity 1
       description: The light entity controlled by endpoint 1.
+      selector:
+        entity:
+          domain: light
+    light_entity_2:
+      name: Light Entity 2
+      description: The light entity controlled by endpoint 2.
+      selector:
+        entity:
+          domain: light
+    light_entity_3:
+      name: Light Entity 3
+      description: The light entity controlled by endpoint 3.
+      selector:
+        entity:
+          domain: light
+    light_entity_4:
+      name: Light Entity 4
+      description: The light entity controlled by endpoint 4.
       selector:
         entity:
           domain: light
@@ -50,24 +76,6 @@ blueprint:
           max: 500
           unit_of_measurement: "ms"
           mode: slider
-    light_entity_2:
-      name: Light Entity 2
-      description: The light entity controlled by endpoint 2.
-      selector:
-        entity:
-          domain: light
-    light_entity_3:
-      name: Light Entity 3
-      description: The light entity controlled by endpoint 3.
-      selector:
-        entity:
-          domain: light
-    light_entity_4:
-      name: Light Entity 4
-      description: The light entity controlled by endpoint 4.
-      selector:
-        entity:
-          domain: light
 
 trigger:
   - platform: event
@@ -412,9 +420,9 @@ action:
                   target:
                     entity_id: !input light_entity_3
                   data:
-                    brightness_step: !input delay_3
+                    brightness_step: 10
                 - delay:
-                    milliseconds: 50
+                    milliseconds: !input delay_3
       - conditions:
           - condition: trigger
             id: offHold3
