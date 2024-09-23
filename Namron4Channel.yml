@@ -337,166 +337,166 @@ action:
                 - delay:
                     milliseconds: !input delay_1
                   enabled: true
-    alias: Entity 1
-  - choose:
-      - conditions:
-          - condition: trigger
-            id: on2
-        sequence:
-          - service: light.turn_on
-            target:
-              entity_id: !input light_entity_2
-            data:
-              brightness_pct: 100
-      - conditions:
-          - condition: trigger
-            id: off2
-        sequence:
-          - service: light.turn_off
-            target:
-              entity_id: !input light_entity_2
-      - conditions:
-          - condition: trigger
-            id: onHold2
-        sequence:
-          - repeat:
-              while:
-                - condition: trigger
-                  id: onHold2
-              sequence:
-                - service: light.turn_on
-                  target:
+      alias: Entity 1
+    - choose:
+        - conditions:
+            - condition: trigger
+              id: on2
+          sequence:
+            - service: light.turn_on
+              target:
+                entity_id: !input light_entity_2
+              data:
+                brightness_pct: 100
+        - conditions:
+            - condition: trigger
+              id: off2
+          sequence:
+            - service: light.turn_off
+              target:
+                entity_id: !input light_entity_2
+        - conditions:
+            - condition: trigger
+              id: onHold2
+          sequence:
+            - repeat:
+                while:
+                  - condition: trigger
+                    id: onHold2
+                sequence:
+                  - service: light.turn_on
+                    target:
+                      entity_id: !input light_entity_2
+                    data:
+                      brightness_step: 10
+                  - delay:
+                      milliseconds: !input delay_2
+        - conditions:
+            - condition: trigger
+              id: offHold2
+          sequence:
+            - repeat:
+                while:
+                  - condition: trigger
+                    id: offHold2
+                  - condition: numeric_state
                     entity_id: !input light_entity_2
-                  data:
-                    brightness_step: 10
-                - delay:
-                    milliseconds: !input delay_2
-      - conditions:
-          - condition: trigger
-            id: offHold2
-        sequence:
-          - repeat:
-              while:
-                - condition: trigger
-                  id: offHold2
-                - condition: numeric_state
-                  entity_id: !input light_entity_2
-                  attribute: brightness
-                  above: 2
-              sequence:
-                - service: light.turn_on
-                  target:
-                    entity_id: !input light_entity_2
-                  data:
-                    brightness_step: -10
-                - delay:
-                    milliseconds: !input delay_2
-    alias: Entity 2
-  - choose:
-      - conditions:
-          - condition: trigger
-            id: on3
-        sequence:
-          - service: light.turn_on
-            target:
-              entity_id: !input light_entity_3
-            data:
-              brightness_pct: 100
-      - conditions:
-          - condition: trigger
-            id: off3
-        sequence:
-          - service: light.turn_off
-            target:
-              entity_id: !input light_entity_3
-      - conditions:
-          - condition: trigger
-            id: onHold3
-        sequence:
-          - repeat:
-              while:
-                - condition: trigger
-                  id: onHold3
-              sequence:
-                - service: light.turn_on
-                  target:
+                    attribute: brightness
+                    above: 2
+                sequence:
+                  - service: light.turn_on
+                    target:
+                      entity_id: !input light_entity_2
+                    data:
+                      brightness_step: -10
+                  - delay:
+                      milliseconds: !input delay_2
+      alias: Entity 2
+    - choose:
+        - conditions:
+            - condition: trigger
+              id: on3
+          sequence:
+            - service: light.turn_on
+              target:
+                entity_id: !input light_entity_3
+              data:
+                brightness_pct: 100
+        - conditions:
+            - condition: trigger
+              id: off3
+          sequence:
+            - service: light.turn_off
+              target:
+                entity_id: !input light_entity_3
+        - conditions:
+            - condition: trigger
+              id: onHold3
+          sequence:
+            - repeat:
+                while:
+                  - condition: trigger
+                    id: onHold3
+                sequence:
+                  - service: light.turn_on
+                    target:
+                      entity_id: !input light_entity_3
+                    data:
+                      brightness_step: 10
+                  - delay:
+                      milliseconds: !input delay_3
+        - conditions:
+            - condition: trigger
+              id: offHold3
+          sequence:
+            - repeat:
+                while:
+                  - condition: trigger
+                    id: offHold3
+                  - condition: numeric_state
                     entity_id: !input light_entity_3
-                  data:
-                    brightness_step: 10
-                - delay:
-                    milliseconds: !input delay_3
-      - conditions:
-          - condition: trigger
-            id: offHold3
-        sequence:
-          - repeat:
-              while:
-                - condition: trigger
-                  id: offHold3
-                - condition: numeric_state
-                  entity_id: !input light_entity_3
-                  attribute: brightness
-                  above: 2
-              sequence:
-                - service: light.turn_on
-                  target:
-                    entity_id: !input light_entity_3
-                  data:
-                    brightness_step: -10
-                - delay:
-                    milliseconds: !input delay_3
-    alias: Entity 3
-  - choose:
-      - conditions:
-          - condition: trigger
-            id: on4
-        sequence:
-          - service: light.turn_on
-            target:
-              entity_id: !input light_entity_4
-            data:
-              brightness_pct: 100
-      - conditions:
-          - condition: trigger
-            id: off4
-        sequence:
-          - service: light.turn_off
-            target:
-              entity_id: !input light_entity_4
-      - conditions:
-          - condition: trigger
-            id: onHold4
-        sequence:
-          - repeat:
-              while:
-                - condition: trigger
-                  id: onHold4
-              sequence:
-                - service: light.turn_on
-                  target:
+                    attribute: brightness
+                    above: 2
+                sequence:
+                  - service: light.turn_on
+                    target:
+                      entity_id: !input light_entity_3
+                    data:
+                      brightness_step: -10
+                  - delay:
+                      milliseconds: !input delay_3
+      alias: Entity 3
+    - choose:
+        - conditions:
+            - condition: trigger
+              id: on4
+          sequence:
+            - service: light.turn_on
+              target:
+                entity_id: !input light_entity_4
+              data:
+                brightness_pct: 100
+        - conditions:
+            - condition: trigger
+              id: off4
+          sequence:
+            - service: light.turn_off
+              target:
+                entity_id: !input light_entity_4
+        - conditions:
+            - condition: trigger
+              id: onHold4
+          sequence:
+            - repeat:
+                while:
+                  - condition: trigger
+                    id: onHold4
+                sequence:
+                  - service: light.turn_on
+                    target:
+                      entity_id: !input light_entity_4
+                    data:
+                      brightness_step: 10
+                  - delay:
+                      milliseconds: !input delay_4
+        - conditions:
+            - condition: trigger
+              id: offHold4
+          sequence:
+            - repeat:
+                while:
+                  - condition: trigger
+                    id: offHold4
+                  - condition: numeric_state
                     entity_id: !input light_entity_4
-                  data:
-                    brightness_step: 10
-                - delay:
-                    milliseconds: !input delay_4
-      - conditions:
-          - condition: trigger
-            id: offHold4
-        sequence:
-          - repeat:
-              while:
-                - condition: trigger
-                  id: offHold4
-                - condition: numeric_state
-                  entity_id: !input light_entity_4
-                  attribute: brightness
-                  above: 2
-              sequence:
-                - service: light.turn_on
-                  target:
-                    entity_id: !input light_entity_4
-                  data:
-                    brightness_step: -10
-                - delay:
-                    milliseconds: !input delay_4
-    alias: Entity 4
+                    attribute: brightness
+                    above: 2
+                sequence:
+                  - service: light.turn_on
+                    target:
+                      entity_id: !input light_entity_4
+                    data:
+                      brightness_step: -10
+                  - delay:
+                      milliseconds: !input delay_4
+      alias: Entity 4
