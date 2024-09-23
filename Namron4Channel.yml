@@ -1,5 +1,5 @@
 blueprint:
-  name: NAMRON 4 Channel ZigBee Switch v2.2.1
+  name: NAMRON 4 Channel ZigBee Switch v2.3
   description: Controls lights based on ZHA events for each endpoint.
   domain: automation
   input:
@@ -14,6 +14,15 @@ blueprint:
       selector:
         entity:
           domain: light
+    delay_1:
+      name: Dim delay
+      description: Sets sleep time in dimming automation for selected endpoint
+      selector:
+        number:
+          min: 0
+          max: 500
+          unit_of_measurement: "ms"
+          mode: slider
     light_entity_2:
       name: Light Entity 2
       description: The light entity controlled by endpoint 2.
@@ -198,6 +207,42 @@ trigger:
       endpoint_id: 4
       command: "off"
     id: off4
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input device_id
+      endpoint_id: 4
+      command: move_with_on_off
+      args:
+        - 0
+        - 50
+    id: onHold4
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input device_id
+      endpoint_id: 4
+      command: stop_with_on_off
+    id: onRelease4
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input device_id
+      endpoint_id: 4
+      command: move
+      args:
+        - 1
+        - 50
+        - 0
+        - 0
+    id: offHold4
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input device_id
+      endpoint_id: 4
+      command: stop
+    id: onReleaseDown4
 
 action:
   - choose:
@@ -230,7 +275,7 @@ action:
                   target:
                     entity_id: !input light_entity_1
                   data:
-                    brightness_step_pct: 10
+                    brightness_step: 10
                 - delay:
                     milliseconds: 50
                   enabled: true
@@ -251,7 +296,7 @@ action:
                   target:
                     entity_id: !input light_entity_1
                   data:
-                    brightness_step_pct: -10
+                    brightness_step: -10
                 - delay:
                     milliseconds: 50
                   enabled: true
@@ -285,7 +330,7 @@ action:
                   target:
                     entity_id: !input light_entity_2
                   data:
-                    brightness_step_pct: 10
+                    brightness_step: 10
                 - delay:
                     milliseconds: 50
       - conditions:
@@ -305,7 +350,7 @@ action:
                   target:
                     entity_id: !input light_entity_2
                   data:
-                    brightness_step_pct: -10
+                    brightness_step: -10
                 - delay:
                     milliseconds: 50
   - choose:
@@ -338,7 +383,7 @@ action:
                   target:
                     entity_id: !input light_entity_3
                   data:
-                    brightness_step_pct: 10
+                    brightness_step: 10
                 - delay:
                     milliseconds: 50
       - conditions:
@@ -358,7 +403,7 @@ action:
                   target:
                     entity_id: !input light_entity_3
                   data:
-                    brightness_step_pct: -10
+                    brightness_step: -10
                 - delay:
                     milliseconds: 50
   - choose:
