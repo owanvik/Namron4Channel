@@ -1,5 +1,5 @@
 blueprint:
-  name: NAMRON 4 Channel ZigBee Switch v2.3
+  name: NAMRON 4 Channel ZigBee Switch v2.3.1
   description: Controls lights based on ZHA events for each endpoint.
   domain: automation
   input:
@@ -15,7 +15,34 @@ blueprint:
         entity:
           domain: light
     delay_1:
-      name: Dim delay
+      name: Dim delay entity 1
+      description: Sets sleep time in dimming automation for selected endpoint
+      selector:
+        number:
+          min: 0
+          max: 500
+          unit_of_measurement: "ms"
+          mode: slider
+    delay_2:
+      name: Dim delay entity 2
+      description: Sets sleep time in dimming automation for selected endpoint
+      selector:
+        number:
+          min: 0
+          max: 500
+          unit_of_measurement: "ms"
+          mode: slider
+    delay_3:
+      name: Dim delay entity 3
+      description: Sets sleep time in dimming automation for selected endpoint
+      selector:
+        number:
+          min: 0
+          max: 500
+          unit_of_measurement: "ms"
+          mode: slider
+    delay_4:
+      name: Dim delay entity 4
       description: Sets sleep time in dimming automation for selected endpoint
       selector:
         number:
@@ -277,7 +304,7 @@ action:
                   data:
                     brightness_step: 10
                 - delay:
-                    milliseconds: 50
+                    milliseconds: !input delay_1
                   enabled: true
       - conditions:
           - condition: trigger
@@ -298,7 +325,7 @@ action:
                   data:
                     brightness_step: -10
                 - delay:
-                    milliseconds: 50
+                    milliseconds: !input delay_1
                   enabled: true
   - choose:
       - conditions:
@@ -332,7 +359,7 @@ action:
                   data:
                     brightness_step: 10
                 - delay:
-                    milliseconds: 50
+                    milliseconds: !input delay_2
       - conditions:
           - condition: trigger
             id: offHold2
@@ -352,7 +379,7 @@ action:
                   data:
                     brightness_step: -10
                 - delay:
-                    milliseconds: 50
+                    milliseconds: !input delay_2
   - choose:
       - conditions:
           - condition: trigger
@@ -383,7 +410,7 @@ action:
                   target:
                     entity_id: !input light_entity_3
                   data:
-                    brightness_step: 10
+                    brightness_step: !input delay_3
                 - delay:
                     milliseconds: 50
       - conditions:
@@ -405,7 +432,7 @@ action:
                   data:
                     brightness_step: -10
                 - delay:
-                    milliseconds: 50
+                    milliseconds: !input delay_3
   - choose:
       - conditions:
           - condition: trigger
@@ -423,3 +450,39 @@ action:
           - service: light.turn_off
             target:
               entity_id: !input light_entity_4
+      - conditions:
+          - condition: trigger
+            id: onHold4
+        sequence:
+          - repeat:
+              while:
+                - condition: trigger
+                  id: onHold4
+              sequence:
+                - service: light.turn_on
+                  target:
+                    entity_id: !input light_entity_4
+                  data:
+                    brightness_step: 10
+                - delay:
+                    milliseconds: !input delay_4
+      - conditions:
+          - condition: trigger
+            id: offHold4
+        sequence:
+          - repeat:
+              while:
+                - condition: trigger
+                  id: offHold4
+                - condition: numeric_state
+                  entity_id: !input light_entity_4
+                  attribute: brightness
+                  above: 2
+              sequence:
+                - service: light.turn_on
+                  target:
+                    entity_id: !input light_entity_4
+                  data:
+                    brightness_step: -10
+                - delay:
+                    milliseconds: !input delay_4
