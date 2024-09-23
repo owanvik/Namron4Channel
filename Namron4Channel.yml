@@ -1,5 +1,5 @@
 blueprint:
-  name: NAMRON 4 Channel ZigBee Switch v2.3.1
+  name: NAMRON 4 Channel ZigBee Switch v2.3.2
   description: Controls lights based on ZHA events for each endpoint.
   domain: automation
   input:
@@ -327,6 +327,7 @@ action:
                 - delay:
                     milliseconds: !input delay_1
                   enabled: true
+    alias: Entity 1
   - choose:
       - conditions:
           - condition: trigger
@@ -380,6 +381,7 @@ action:
                     brightness_step: -10
                 - delay:
                     milliseconds: !input delay_2
+    alias: Entity 2
   - choose:
       - conditions:
           - condition: trigger
@@ -433,6 +435,7 @@ action:
                     brightness_step: -10
                 - delay:
                     milliseconds: !input delay_3
+    alias: Entity 3
   - choose:
       - conditions:
           - condition: trigger
@@ -486,3 +489,4 @@ action:
                     brightness_step: -10
                 - delay:
                     milliseconds: !input delay_4
+    alias: Entity 4
