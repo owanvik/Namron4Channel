@@ -1,5 +1,5 @@
 blueprint:
-  name: NAMRON 4 Channel ZigBee Switch v2.3.9
+  name: NAMRON 4 Channel ZigBee Switch v2.3.91
   description: Controls lights based on ZHA events for each endpoint.
   domain: automation
   input:
@@ -68,48 +68,6 @@ blueprint:
           max: 500
           unit_of_measurement: "ms"
           mode: slider
-    percentage_1: 
-      name: Step percentage 1
-      description: Sets the percentage the endpoint dims up or down for each step
-      selector:
-        number:
-          min: 1
-          max: 100
-          unit_of_measurement: "%"
-          mode: slider
-          step: 1
-    percentage_2: 
-      name: Step percentage 2
-      description: Sets the percentage the endpoint dims up or down for each step
-      selector:
-        number:
-          min: 1
-          max: 100
-          unit_of_measurement: "%"
-          mode: slider
-          step: 1
-    percentage_3: 
-      name: Step percentage 3
-      description: Sets the percentage the endpoint dims up or down for each step
-      selector:
-        number:
-          min: 1
-          max: 100
-          unit_of_measurement: "%"
-          mode: slider
-          step: 1
-    percentage_4: 
-      name: Step percentage 4
-      description: Sets the percentage the endpoint dims up or down for each step
-      selector:
-        number:
-          min: 1
-          max: 100
-          unit_of_measurement: "%"
-          mode: slider
-          step: 1
-
-
 trigger:
   - platform: event
     event_type: zha_event
