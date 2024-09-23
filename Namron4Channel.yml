@@ -337,7 +337,7 @@ action:
                 - delay:
                     milliseconds: !input delay_1
                   enabled: true
-  parallel:
+  #parallel:
     alias: Entity 1
   - choose:
       - conditions:
