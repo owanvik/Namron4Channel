@@ -68,6 +68,47 @@ blueprint:
           max: 500
           unit_of_measurement: "ms"
           mode: slider
+    percentage_1: 
+      name: Step percentage 1
+      description: Sets the percentage the endpoint dims up or down for each step
+      selector:
+        number:
+          min: 1
+          max: 100
+          unit_of_measurement: "%"
+          mode: slider
+          step: 1
+    percentage_2: 
+      name: Step percentage 2
+      description: Sets the percentage the endpoint dims up or down for each step
+      selector:
+        number:
+          min: 1
+          max: 100
+          unit_of_measurement: "%"
+          mode: slider
+          step: 1
+    percentage_3: 
+      name: Step percentage 3
+      description: Sets the percentage the endpoint dims up or down for each step
+      selector:
+        number:
+          min: 1
+          max: 100
+          unit_of_measurement: "%"
+          mode: slider
+          step: 1
+    percentage_4: 
+      name: Step percentage 4
+      description: Sets the percentage the endpoint dims up or down for each step
+      selector:
+        number:
+          min: 1
+          max: 100
+          unit_of_measurement: "%"
+          mode: slider
+          step: 1
+
 
 trigger:
   - platform: event
@@ -300,7 +341,7 @@ action:
               sequence:
                 - service: light.turn_on
                   data:
-                    brightness_step: 10
+                    brightness_step: !input percentage_1:
                   target:
                     entity_id: !input light_entity_1
                 - delay:
@@ -321,7 +362,7 @@ action:
               sequence:
                 - service: light.turn_on
                   data:
-                    brightness_step: -10
+                    brightness_step: - !input percentage_1
                   target:
                     entity_id: !input light_entity_1
                 - delay:
