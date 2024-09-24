@@ -1,5 +1,5 @@
 blueprint:
-  name: NAMRON 4 Channel ZigBee Switch v2.3.955
+  name: NAMRON 4 Channel ZigBee Switch v2.3.956
   description: Controls lights based on ZHA events for each endpoint.
   domain: automation
   input:
@@ -345,8 +345,8 @@ action:
                   id: onHold1
               sequence:
                 - service: light.turn_on
-                  data_template:
-                    brightness_step_pct: "{{ !input brightness_step_2 | int }}"
+                  data:
+                    brightness_step_pct: "{{ states('input_number.brightness_step_1') | int }}"
                   target:
                     entity_id: !input light_entity_1
                 - delay:
@@ -366,8 +366,8 @@ action:
                   above: 2
               sequence:
                 - service: light.turn_on
-                  data_template:
-                    brightness_step_pct: "{{ (-1 * (!input brightness_step_2 | int)) }}"
+                  data:
+                    brightness_step_pct: "{{ (-1 * states('input_number.brightness_step_1') | int) }}"
                     entity_id: !input light_entity_1
                 - delay:
                     milliseconds: !input delay_1
