@@ -1,5 +1,5 @@
 blueprint:
-  name: NAMRON 4 Channel ZigBee Switch v2.3.953
+  name: NAMRON 4 Channel ZigBee Switch v2.3.954
   description: Controls lights based on ZHA events for each endpoint.
   domain: automation
   input:
@@ -46,6 +46,26 @@ blueprint:
     brightness_step_2:
       name: Brightness Step for Light Entity 2
       description: Adjust the brightness step for endpoint 2.
+      default: 10
+      selector:
+        number:
+          min: 1
+          max: 100
+          mode: slider
+          unit_of_measurement: "%"
+    brightness_step_3:
+      name: Brightness Step for Light Entity 3
+      description: Adjust the brightness step for endpoint 3.
+      default: 10
+      selector:
+        number:
+          min: 1
+          max: 100
+          mode: slider
+          unit_of_measurement: "%"
+    brightness_step_4:
+      name: Brightness Step for Light Entity 4
+      description: Adjust the brightness step for endpoint 4.
       default: 10
       selector:
         number:
