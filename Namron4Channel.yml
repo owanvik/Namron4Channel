@@ -185,7 +185,7 @@ blueprint:
           description: Toggle to override default
           selector:
             boolean:
-              default: false
+          default: [false]
 
         action_on1:
           name: Button 1 Press UP
