@@ -1,5 +1,5 @@
 blueprint:
-  name: NAMRON 4 Channel ZigBee Switch v2.46 (beta)
+  name: NAMRON 4 Channel ZigBee Switch v2.47 (beta)
   description: Controls lights based on ZHA events for each endpoint. Note that the NAMRON 4 Strip switch have the buttons arranged backwards. Seen from left to right, the buttons are Button 4, Button 3, Button 2 and Button 1.
   domain: automation
   input:
@@ -494,7 +494,7 @@ action:
                 sequence: !input action_on1
               - conditions:
                   - condition: template
-                    value: "{{ !inputaction_on1 is none }}"
+                    value: "{{ !input action_on1 is none }}"
                 sequence:
                 - service: light.turn_on
                   target:
