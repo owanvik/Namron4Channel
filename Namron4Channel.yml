@@ -1,18 +1,18 @@
 blueprint:
-  name: NAMRON 4 Channel ZigBee Switch v2.41
+  name: NAMRON 4 Channel ZigBee Switch v2.42
   description: Controls lights based on ZHA events for each endpoint.
   domain: automation
   input:
 
     device: 
-    name: Device Settings
-    description: Settings related to the ZHA switch device.
-    input:
-      device_id:
-        name: Device ID
-        description: The unique identifier of the ZHA switch. This ID is required to connect the automation with the specific ZigBee device. You can find this in developer tools if you listen to zha_event while pressing the button. Copy the value from device_id and paste it here.
-        selector:
-          text: {}
+      name: Device Settings
+      description: Settings related to the ZHA switch device.
+      input:
+        device_id:
+          name: Device ID
+          description: The unique identifier of the ZHA switch. This ID is required to connect the automation with the specific ZigBee device. You can find this in developer tools if you listen to zha_event while pressing the button. Copy the value from device_id and paste it here.
+          selector:
+            text: {}
     lights:
       name: lights
       description: lights
