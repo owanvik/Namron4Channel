@@ -508,7 +508,7 @@ action:
                     - conditions:
                       - condition: template
                         value_template: "{{ action_on1 is not none}}"
-                    sequence:
+                      sequence:
                       - service: !input action_on1
 
               - conditions:
