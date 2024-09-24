@@ -1,5 +1,5 @@
 blueprint:
-  name: NAMRON 4 Channel ZigBee Switch v2.48 (beta)
+  name: NAMRON 4 Channel ZigBee Switch v2.49 (beta)
   description: Controls lights based on ZHA events for each endpoint. Note that the NAMRON 4 Strip switch have the buttons arranged backwards. Seen from left to right, the buttons are Button 4, Button 3, Button 2 and Button 1.
   domain: automation
   input:
@@ -180,6 +180,13 @@ blueprint:
       description: These actions will override default behaviour. Note that you will need to override all actions for each button to completely replace the light control.
       collapsed: true
       input:
+        use_override_1:
+        name: Override button 1
+        description: Toggle to override default
+        selector:
+          boolean:
+        default: false
+
         action_on1:
           name: Button 1 Press UP
           description: Action to run when pressing UP on the first button from the right.
@@ -489,12 +496,14 @@ action:
         sequence:
           - choose:
               - conditions:
-                  - condition: template
-                    value: !input action_on1 is not none
+                  - condition: state
+                    entity_id: input_boolean.use_override_1
+                    state: true
                 sequence: !input action_on1
               - conditions:
-                  - condition: template
-                    value: !input action_on1 is none
+                  - condition: state
+                    entity_id: input_boolean.use_override_1
+                    state: false
                 sequence:
                 - service: light.turn_on
                   target:
