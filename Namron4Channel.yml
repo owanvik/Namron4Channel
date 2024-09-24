@@ -504,7 +504,7 @@ action:
                   - condition: template
                     value_template:  "{{use_override_1 == 'override' }}"
                 sequence: 
-                  -choose:
+                  - choose:
                     - conditions:
                       - condition: template
                         value_template: "{{ action_on1 is not none}}"
