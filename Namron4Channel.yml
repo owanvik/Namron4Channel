@@ -35,7 +35,7 @@ blueprint:
           domain: light
     delay_1:
       name: Dim delay entity 1
-      description: Sets sleep time in dimming automation for selected endpoint
+      description: Sets sleep time in dimming automation for selected endpoint.
       default: 500
       selector:
         number:
@@ -45,7 +45,7 @@ blueprint:
           mode: slider
     delay_2:
       name: Dim delay entity 2
-      description: Sets sleep time in dimming automation for selected endpoint
+      description: Sets sleep time in dimming automation for selected endpoint.
       default: 500
       selector:
         number:
@@ -55,7 +55,7 @@ blueprint:
           mode: slider
     delay_3:
       name: Dim delay entity 3
-      description: Sets sleep time in dimming automation for selected endpoint
+      description: Sets sleep time in dimming automation for selected endpoint.
       default: 500
       selector:
         number:
@@ -65,7 +65,7 @@ blueprint:
           mode: slider
     delay_4:
       name: Dim delay entity 4
-      description: Sets sleep time in dimming automation for selected endpoint
+      description: Sets sleep time in dimming automation for selected endpoint.
       default: 500
       selector:
         number:
