@@ -173,6 +173,12 @@ blueprint:
               max: -1
               step: 1
               mode: slider
+    override_action:
+      name: Override actions
+      description: These actions will override default behaviour
+      input:
+        action_onPress1:
+          action:
 
 trigger:
   - platform: event
