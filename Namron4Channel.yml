@@ -173,13 +173,92 @@ blueprint:
               max: -1
               step: 1
               mode: slider
-    override_action:
+    override_actions:
       name: Override actions
-      description: These actions will override default behaviour
+      description: These actions will override default behaviour. Note that you will need to override all actions for each button to completely replace the light control.
+      collapsed: true
       input:
-        action_onPress1:
-          name: Action to run.
-          description: Action to run when triggered.
+        action_on1:
+          name: Button 1 Press UP
+          description: Action to run when pressing UP on the first button from the right.
+          selector:
+            action: {}
+        action_off1:
+          name: Button 1 Press DOWN
+          description: Action to run when pressing DOWN on the first button from the right.
+          selector:
+            action: {}
+        action_onHold1:
+          name: Button 1 Hold UP
+          description: Action to run when holding UP on the first button from the right.
+          selector:
+            action: {}
+        action_offHold1:
+          name: Button 1 Hold DOWN
+          description: Action to run when holding DOWN on the first button from the right.
+          selector:
+            action: {}
+
+        action_on2:
+          name: Button 2 Press UP
+          description: Action to run when pressing UP on the second button from the right.
+          selector:
+            action: {}
+        action_off2:
+          name: Button 2 Press DOWN
+          description: Action to run when pressing DOWN on the second button from the right.
+          selector:
+            action: {}
+        action_onHold2:
+          name: Button 2 Hold UP
+          description: Action to run when holding UP on the second button from the right.
+          selector:
+            action: {}
+        action_offHold2:
+          name: Button 2 Hold DOWN
+          description: Action to run when holding DOWN on the second button from the right.
+          selector:
+            action: {}
+
+        action_on3:
+          name: Button 3 Press UP
+          description: Action to run when pressing UP on the third button from the right.
+          selector:
+            action: {}
+        action_off3:
+          name: Button 3 Press DOWN
+          description: Action to run when pressing DOWN on the third button from the right.
+          selector:
+            action: {}
+        action_onHold3:
+          name: Button 3 Hold UP
+          description: Action to run when holding UP on the third button from the right.
+          selector:
+            action: {}
+        action_offHold3:
+          name: Button 3 Hold DOWN
+          description: Action to run when holding DOWN on the third button from the right.
+          selector:
+            action: {}
+
+        action_on4:
+          name: Button 4 Press UP
+          description: Action to run when pressing UP on the first button from the left.
+          selector:
+            action: {}
+        action_off4:
+          name: Button 4 Press DOWN
+          description: Action to run when pressing DOWN on the first button from the left.
+          selector:
+            action: {}
+        action_onHold4:
+          name: Button 4 Hold UP
+          description: Action to run when holding UP on the first button from the left.
+          selector:
+            action: {}
+        action_offHold4:
+          name: Button 4 Hold DOWN
+          description: Action to run when holding DOWN on the first button from the left.
           selector:
             action: {}
 trigger:
