@@ -1,5 +1,5 @@
 blueprint:
-  name: NAMRON 4 Channel ZigBee Switch v2.43
+  name: NAMRON 4 Channel ZigBee Switch v2.44
   description: Controls lights based on ZHA events for each endpoint.
   domain: automation
   input:
@@ -173,6 +173,16 @@ blueprint:
               max: -1
               step: 1
               mode: slider
+    custom_actions:
+      name: Custom actions
+      description: Custom actions for the buttons. Adding a custom action to any of the switches will override the default behaviour
+      input:
+        custom_action_on_1:
+        name: Custom Action for On Trigger 1
+        description: Custom action to override the default for the on trigger of Light Entity 1.
+        default: null
+        selector:
+          action: {}
 
 trigger:
   - platform: event
