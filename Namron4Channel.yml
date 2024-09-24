@@ -498,12 +498,12 @@ action:
               - conditions:
                   - condition: state
                     entity_id: input_boolean.use_override_1
-                    state: true
+                    state: 'on'
                 sequence: !input action_on1
               - conditions:
                   - condition: state
                     entity_id: input_boolean.use_override_1
-                    state: false
+                    state: 'off'
                 sequence:
                 - service: light.turn_on
                   target:
