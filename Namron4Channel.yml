@@ -183,7 +183,7 @@ blueprint:
         use_override_1:
           name: Override button 1
           description: Toggle to override default
-          default: false
+          default: off
           selector:
             boolean:
 
