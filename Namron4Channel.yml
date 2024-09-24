@@ -1,5 +1,5 @@
 blueprint:
-  name: NAMRON 4 Channel ZigBee Switch v2.3.91
+  name: NAMRON 4 Channel ZigBee Switch v2.3.92
   description: Controls lights based on ZHA events for each endpoint.
   domain: automation
   input:
@@ -35,6 +35,7 @@ blueprint:
     delay_1:
       name: Dim delay entity 1
       description: Sets sleep time in dimming automation for selected endpoint
+      default: 250
       selector:
         number:
           min: 0
@@ -44,6 +45,7 @@ blueprint:
     delay_2:
       name: Dim delay entity 2
       description: Sets sleep time in dimming automation for selected endpoint
+      default: 250
       selector:
         number:
           min: 0
@@ -53,6 +55,7 @@ blueprint:
     delay_3:
       name: Dim delay entity 3
       description: Sets sleep time in dimming automation for selected endpoint
+      default: 250
       selector:
         number:
           min: 0
@@ -62,6 +65,7 @@ blueprint:
     delay_4:
       name: Dim delay entity 4
       description: Sets sleep time in dimming automation for selected endpoint
+      default: 250
       selector:
         number:
           min: 0
