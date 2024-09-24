@@ -1,45 +1,45 @@
 blueprint:
-  name: NAMRON 4 Channel ZigBee Switch v2.3.976
+  name: NAMRON 4 Channel ZigBee Switch v2.3.98
   description: Controls lights based on ZHA events for each endpoint.
   domain: automation
   input:
 
     device_id:
       name: Device ID
-      description: The device ID of the ZHA switch.
+      description: The unique identifier of the ZHA switch. This ID is required to connect the automation with the specific ZigBee device.
       selector:
         text: {}
     light_entity_1:
       name: Light Entity 1
-      description: The light entity controlled by endpoint 1.
+      description: The light entity controlled by the first button from the right. Select the specific light to manage with this button.
       selector:
         entity:
           domain: light
           multiple: false
     light_entity_2:
       name: Light Entity 2
-      description: The light entity controlled by endpoint 2.
+      description: The light entity controlled by the second button from the right.
       selector:
         entity:
           domain: light
           multiple: false
     light_entity_3:
       name: Light Entity 3
-      description: The light entity controlled by endpoint 3.
+      description: The light entity controlled by the third button from the right. 
       selector:
         entity:
           domain: light
           multiple: false
     light_entity_4:
       name: Light Entity 4
-      description: The light entity controlled by endpoint 4.
+      description: he light entity controlled by the first button from the left.
       selector:
         entity:
           domain: light
           multiple: false
     delay_1:
-      name: Dim delay entity 1
-      description: Sets sleep time in dimming automation for selected endpoint.
+      name: Dim Delay for Light Entity 1
+      description: Time (in milliseconds) to wait before dimming action is executed for Light Entity 1. Adjust this for smoother transitions.
       default: 500
       selector:
         number:
@@ -48,8 +48,8 @@ blueprint:
           unit_of_measurement: "ms"
           mode: slider
     delay_2:
-      name: Dim delay entity 2
-      description: Sets sleep time in dimming automation for selected endpoint.
+      name: Dim Delay for Light Entity 2
+      description: Time (in milliseconds) to wait before dimming action is executed for Light Entity 2. Adjust this for smoother transitions.
       default: 500
       selector:
         number:
@@ -58,8 +58,8 @@ blueprint:
           unit_of_measurement: "ms"
           mode: slider
     delay_3:
-      name: Dim delay entity 3
-      description: Sets sleep time in dimming automation for selected endpoint.
+      name: Dim Delay Light for Entity 3
+      description: Time (in milliseconds) to wait before dimming action is executed for Light Entity 3. Adjust this for smoother transitions.
       default: 500
       selector:
         number:
@@ -68,8 +68,8 @@ blueprint:
           unit_of_measurement: "ms"
           mode: slider
     delay_4:
-      name: Dim delay entity 4
-      description: Sets sleep time in dimming automation for selected endpoint.
+      name: Dim Delay for Light Entity 4
+      description: Time (in milliseconds) to wait before dimming action is executed for Light Entity 4. Adjust this for smoother transitions.
       default: 500
       selector:
         number:
@@ -79,7 +79,8 @@ blueprint:
           mode: slider
 
     brightness_step_1:
-      name: Brightness Step for Light Entity 1
+      name: Brightness Step UP for Light Entity 1
+      description: The amount to increase brightness (in percentage) for Light Entity 1 with each trigger from the first button on the right. Choose a suitable step for gradual dimming.
       default: 10
       selector:
         number:
@@ -88,7 +89,8 @@ blueprint:
           step: 1
           mode: slider
     brightness_step_2:
-      name: Brightness Step for Light Entity 2
+      name: Brightness Step UP for Light Entity 2
+      description: The amount to increase brightness (in percentage) for Light Entity 2 with each trigger from the first button on the right. Choose a suitable step for gradual dimming.
       default: 10
       selector:
         number:
@@ -97,7 +99,8 @@ blueprint:
           step: 1
           mode: slider
     brightness_step_3:
-      name: Brightness Step for Light Entity 3
+      name: Brightness Step UP for Light Entity 3
+      description: The amount to increase brightness (in percentage) for Light Entity 3 with each trigger from the first button on the right. Choose a suitable step for gradual dimming.
       default: 10
       selector:
         number:
@@ -106,7 +109,8 @@ blueprint:
           step: 1
           mode: slider
     brightness_step_4:
-      name: Brightness Step for Light Entity 4
+      name: Brightness Step UP for Light Entity 4
+      description: The amount to increase brightness (in percentage) for Light Entity 4 with each trigger from the first button on the right. Choose a suitable step for gradual dimming.
       default: 10
       selector:
         number:
@@ -116,7 +120,8 @@ blueprint:
           mode: slider
 
     brightness_step_down_1:
-      name: Brightness Step down for Light Entity 1
+      name: Brightness Step DOWN for Light Entity 1
+      description: The amount to decrease brightness (in percentage) for Light Entity 1 with each trigger from the first button on the right. Set a suitable step for gradual dimming.
       default: -10
       selector:
         number:
@@ -125,7 +130,8 @@ blueprint:
           step: 1
           mode: slider
     brightness_step_down_2:
-      name: Brightness Step down for Light Entity 2
+      name: Brightness Step DOWN for Light Entity 2
+      description: The amount to decrease brightness (in percentage) for Light Entity 2 with each trigger from the first button on the right. Set a suitable step for gradual dimming.
       default: -10
       selector:
         number:
@@ -134,7 +140,8 @@ blueprint:
           step: 1
           mode: slider
     brightness_step_down_3:
-      name: Brightness Step down for Light Entity 3
+      name: Brightness Step DOWN for Light Entity 3
+      description: The amount to decrease brightness (in percentage) for Light Entity 3 with each trigger from the first button on the right. Set a suitable step for gradual dimming.
       default: -10
       selector:
         number:
@@ -143,7 +150,8 @@ blueprint:
           step: 1
           mode: slider
     brightness_step_down_4:
-      name: Brightness Step down for Light Entity 4
+      name: Brightness Step DOWN for Light Entity 4
+      description: The amount to decrease brightness (in percentage) for Light Entity 4 with each trigger from the first button on the right. Set a suitable step for gradual dimming.
       default: -10
       selector:
         number:
