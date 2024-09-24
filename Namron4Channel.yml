@@ -1,9 +1,9 @@
 blueprint:
-  name: NAMRON 4 Channel ZigBee Switch v2.3.958
+  name: NAMRON 4 Channel ZigBee Switch v2.3.960
   description: Controls lights based on ZHA events for each endpoint.
   domain: automation
   input:
-  
+
     device_id:
       name: Device ID
       description: The device ID of the ZHA switch.
@@ -33,6 +33,46 @@ blueprint:
       selector:
         entity:
           domain: light
+    delay_1:
+      name: Dim delay entity 1
+      description: Sets sleep time in dimming automation for selected endpoint
+      default: 500
+      selector:
+        number:
+          min: 0
+          max: 1500
+          unit_of_measurement: "ms"
+          mode: slider
+    delay_2:
+      name: Dim delay entity 2
+      description: Sets sleep time in dimming automation for selected endpoint
+      default: 500
+      selector:
+        number:
+          min: 0
+          max: 1500
+          unit_of_measurement: "ms"
+          mode: slider
+    delay_3:
+      name: Dim delay entity 3
+      description: Sets sleep time in dimming automation for selected endpoint
+      default: 500
+      selector:
+        number:
+          min: 0
+          max: 1500
+          unit_of_measurement: "ms"
+          mode: slider
+    delay_4:
+      name: Dim delay entity 4
+      description: Sets sleep time in dimming automation for selected endpoint
+      default: 500
+      selector:
+        number:
+          min: 0
+          max: 1500
+          unit_of_measurement: "ms"
+          mode: slider
 
   input_number:
 
@@ -77,46 +117,6 @@ blueprint:
           mode: slider
           unit_of_measurement: "%"
 
-    delay_1:
-      name: Dim delay entity 1
-      description: Sets sleep time in dimming automation for selected endpoint
-      default: 500
-      selector:
-        number:
-          min: 0
-          max: 1500
-          unit_of_measurement: "ms"
-          mode: slider
-    delay_2:
-      name: Dim delay entity 2
-      description: Sets sleep time in dimming automation for selected endpoint
-      default: 500
-      selector:
-        number:
-          min: 0
-          max: 1500
-          unit_of_measurement: "ms"
-          mode: slider
-    delay_3:
-      name: Dim delay entity 3
-      description: Sets sleep time in dimming automation for selected endpoint
-      default: 500
-      selector:
-        number:
-          min: 0
-          max: 1500
-          unit_of_measurement: "ms"
-          mode: slider
-    delay_4:
-      name: Dim delay entity 4
-      description: Sets sleep time in dimming automation for selected endpoint
-      default: 500
-      selector:
-        number:
-          min: 0
-          max: 1500
-          unit_of_measurement: "ms"
-          mode: slider
 trigger:
   - platform: event
     event_type: zha_event
