@@ -3,6 +3,7 @@ blueprint:
   description: Controls lights based on ZHA events for each endpoint.
   domain: automation
   input:
+  
     device_id:
       name: Device ID
       description: The device ID of the ZHA switch.
@@ -32,7 +33,9 @@ blueprint:
       selector:
         entity:
           domain: light
-    
+
+  input_number:
+
     brightness_step_1:
       name: Brightness Step for Light Entity 1
       description: Adjust the brightness step for endpoint 1.
@@ -73,7 +76,6 @@ blueprint:
           max: 100
           mode: slider
           unit_of_measurement: "%"
-
 
     delay_1:
       name: Dim delay entity 1
