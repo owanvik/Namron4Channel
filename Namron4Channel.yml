@@ -1,5 +1,5 @@
 blueprint:
-  name: NAMRON 4 Channel ZigBee Switch v2.42
+  name: NAMRON 4 Channel ZigBee Switch v2.43
   description: Controls lights based on ZHA events for each endpoint.
   domain: automation
   input:
@@ -14,8 +14,8 @@ blueprint:
           selector:
             text: {}
     lights:
-      name: lights
-      description: lights
+      name: Light Settings
+      description: Configure the light entities controlled by the dimmer switch.
       input:
         light_entity_1:
           name: Light Entity 1
@@ -46,8 +46,8 @@ blueprint:
               domain: light
               multiple: false
     delays:
-      name: delays
-      description: delays
+      name: Dimming Delays
+      description: Configure the delays for dimming actions.
       input:
         delay_1:
           name: Dim Delay for Light Entity 1
@@ -90,8 +90,8 @@ blueprint:
               unit_of_measurement: "ms"
               mode: slider
     brightness_steps:
-      name: Brightness up
-      description: brightness up
+      name: Brightness Steps
+      description: Configure brightness adjustment steps for each light entity.
       input:
         brightness_step_1:
           name: Brightness Step UP for Light Entity 1
@@ -133,11 +133,6 @@ blueprint:
               max: 100
               step: 1
               mode: slider
-
-    brightness_down:
-      name: brightness down
-      description: brightness down
-      input:
         brightness_step_down_1:
           name: Brightness Step DOWN for Light Entity 1
           description: The amount to decrease brightness (in percentage) for Light Entity 1 with each trigger from the first button on the right. Set a suitable step for gradual dimming.
