@@ -1,5 +1,5 @@
 blueprint:
-  name: NAMRON 4 Channel ZigBee Switch v2.3.971
+  name: NAMRON 4 Channel ZigBee Switch v2.3.972
   description: Controls lights based on ZHA events for each endpoint.
   domain: automation
   input:
