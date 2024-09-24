@@ -178,8 +178,10 @@ blueprint:
       description: These actions will override default behaviour
       input:
         action_onPress1:
-          action:
-
+          name: Action to run.
+          description: Action to run when triggered.
+          selector:
+            action: {}
 trigger:
   - platform: event
     event_type: zha_event
