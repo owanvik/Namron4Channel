@@ -48,6 +48,7 @@ blueprint:
     delays:
       name: Dimming Delays
       description: Configure the delays for dimming actions.
+      collapsed: true
       input:
         delay_1:
           name: Dim Delay for Light Entity 1
@@ -92,6 +93,7 @@ blueprint:
     brightness_steps:
       name: Brightness Steps
       description: Configure brightness adjustment steps for each light entity.
+      collapsed: true
       input:
         brightness_step_1:
           name: Brightness Step UP for Light Entity 1
@@ -183,84 +185,100 @@ blueprint:
           description: Action to run when pressing UP on the first button from the right.
           selector:
             action: {}
+          default: []
         action_off1:
           name: Button 1 Press DOWN
           description: Action to run when pressing DOWN on the first button from the right.
           selector:
             action: {}
+          default: []
         action_onHold1:
           name: Button 1 Hold UP
           description: Action to run when holding UP on the first button from the right.
           selector:
             action: {}
+          default: []
         action_offHold1:
           name: Button 1 Hold DOWN
           description: Action to run when holding DOWN on the first button from the right.
           selector:
             action: {}
+          default: []
 
         action_on2:
           name: Button 2 Press UP
           description: Action to run when pressing UP on the second button from the right.
           selector:
             action: {}
+          default: []
         action_off2:
           name: Button 2 Press DOWN
           description: Action to run when pressing DOWN on the second button from the right.
           selector:
             action: {}
+          default: []
         action_onHold2:
           name: Button 2 Hold UP
           description: Action to run when holding UP on the second button from the right.
           selector:
             action: {}
+          default: []
         action_offHold2:
           name: Button 2 Hold DOWN
           description: Action to run when holding DOWN on the second button from the right.
           selector:
             action: {}
+          default: []
 
         action_on3:
           name: Button 3 Press UP
           description: Action to run when pressing UP on the third button from the right.
           selector:
             action: {}
+          default: []
         action_off3:
           name: Button 3 Press DOWN
           description: Action to run when pressing DOWN on the third button from the right.
           selector:
             action: {}
+          default: []
         action_onHold3:
           name: Button 3 Hold UP
           description: Action to run when holding UP on the third button from the right.
           selector:
             action: {}
+          default: []
         action_offHold3:
           name: Button 3 Hold DOWN
           description: Action to run when holding DOWN on the third button from the right.
           selector:
             action: {}
+          default: []
 
         action_on4:
           name: Button 4 Press UP
           description: Action to run when pressing UP on the first button from the left.
           selector:
             action: {}
+          default: []
         action_off4:
           name: Button 4 Press DOWN
           description: Action to run when pressing DOWN on the first button from the left.
           selector:
             action: {}
+          default: []
         action_onHold4:
           name: Button 4 Hold UP
           description: Action to run when holding UP on the first button from the left.
           selector:
             action: {}
+          default: []
         action_offHold4:
           name: Button 4 Hold DOWN
           description: Action to run when holding DOWN on the first button from the left.
           selector:
             action: {}
+          default: []
 trigger:
   - platform: event
     event_type: zha_event
@@ -472,11 +490,11 @@ action:
           - choose:
               - conditions:
                   - condition: template
-                    value: "{{ input.action_on1 is not none }}"
+                    value: "{{ !input action_on1 is not none }}"
                 sequence: !input action_on1
               - conditions:
                   - condition: template
-                    value: "{{ input.action_on1 is none }}"
+                    value: "{{ !inputaction_on1 is none }}"
                 sequence:
                 - service: light.turn_on
                   target:
