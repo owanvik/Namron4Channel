@@ -512,8 +512,8 @@ action:
                       - condition: template
                         value_template: "{{action_on1 is not none}}"
                       sequence:
-                        - service: !input action_on1
-
+                        - service: "{{ action_on1['action'] }}"
+                          data: "{{ action_on1['data'] | default({}) }}"
               - conditions:
                   - condition: template
                     value_template:  "{{use_override_1 == 'default'}}"
