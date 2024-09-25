@@ -512,8 +512,11 @@ action:
                       - condition: template
                         value_template: "{{action_on1 is not none}}"
                       sequence:
-                        - service: "{{ action_on1[0].action }}"
-                            data: "{{ action_on1[0].data }}"
+                        - variables:
+                              service_name: "{{ action_on1[0].action }}"
+                              service_data: "{{ action_on1[0].data }}"
+                          - service: "{{ service_name }}"
+                            data: "{{ service_data }}"
               - conditions:
                   - condition: template
                     value_template:  "{{use_override_1 == 'default'}}"
