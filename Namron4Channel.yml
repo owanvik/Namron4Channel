@@ -512,7 +512,7 @@ action:
                       - condition: template
                         value_template: "{{action_on1 is not none}}"
                       sequence:
-                      !input action_on1
+                        !input action_on1
 
               - conditions:
                   - condition: template
