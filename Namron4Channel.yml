@@ -1,5 +1,5 @@
 blueprint:
-  name: NAMRON 4 Channel ZigBee Switch v2.49971 (beta)
+  name: NAMRON 4 Channel ZigBee Switch v2.49973 (beta)
   description: Controls lights based on ZHA events for each endpoint. Note that the NAMRON 4 Strip switch have the buttons arranged backwards. Seen from left to right, the buttons are Button 4, Button 3, Button 2 and Button 1.
   domain: automation
   input:
@@ -191,6 +191,7 @@ blueprint:
                   value: "override"
                 - label: Default
                   value: default
+
         action_on1:
           name: Button 1 Press UP
           description: Action to run when pressing UP on the first button from the right.
@@ -216,17 +217,6 @@ blueprint:
             action: {}
           default: []
 
-        use_override_2:
-          name: Override button 2
-          description: Toggle to override default
-          default: default
-          selector:
-            select:
-              options:
-                - label: Override
-                  value: "override"
-                - label: Default
-                  value: default
         action_on2:
           name: Button 2 Press UP
           description: Action to run when pressing UP on the second button from the right.
@@ -252,17 +242,6 @@ blueprint:
             action: {}
           default: []
 
-        use_override_3:
-          name: Override button 3
-          description: Toggle to override default
-          default: default
-          selector:
-            select:
-              options:
-                - label: Override
-                  value: "override"
-                - label: Default
-                  value: default
         action_on3:
           name: Button 3 Press UP
           description: Action to run when pressing UP on the third button from the right.
@@ -288,17 +267,6 @@ blueprint:
             action: {}
           default: []
 
-        use_override_4:
-          name: Override button 4
-          description: Toggle to override default
-          default: default
-          selector:
-            select:
-              options:
-                - label: Override
-                  value: "override"
-                - label: Default
-                  value: default
         action_on4:
           name: Button 4 Press UP
           description: Action to run when pressing UP on the first button from the left.
@@ -325,26 +293,8 @@ blueprint:
           default: []
 variables:
     use_override_1: !input 'use_override_1'
-    use_override_2: !input 'use_override_2'
-    use_override_3: !input 'use_override_3'
-    use_override_4: !input 'use_override_4'
     action_on1: !input 'action_on1'
-    action_on2: !input 'action_on2'
-    action_on3: !input 'action_on3'
-    action_on4: !input 'action_on4'
     action_off1: !input 'action_off1'
-    action_off2: !input 'action_off2'
-    action_off3: !input 'action_off3'
-    action_off4: !input 'action_off4'
-    action_onHold1: !input 'action_onHold1'
-    action_onHold2: !input 'action_onHold2'
-    action_onHold3: !input 'action_onHold3'
-    action_onHold4: !input 'action_onHold4'
-    action_offHold1: !input 'action_offHold1'
-    action_offHold2: !input 'action_offHold2'
-    action_offHold3: !input 'action_offHold3'
-    action_offHold4: !input 'action_offHold4'
-
 trigger:
   - platform: event
     event_type: zha_event
@@ -606,470 +556,202 @@ action:
       - conditions:
           - condition: trigger
             id: onHold1
-            sequence:
-          - choose:
-              - conditions:
-                  - condition: template
-                    value_template:  "{{use_override_1 == 'override' }}"
-                sequence: 
-                  - choose:
-                    - conditions:
-                      - condition: template
-                        value_template: "{{action_onHold1 is not none}}"
-                      sequence:
-                        - variables:
-                              service_name_on1: "{{ action_onHold1[0].action }}"
-                              service_data_on1: "{{ action_onHold1[0].data }}"
-                        - service: "{{ service_name_onHold1 }}"
-                          data: "{{ service_data_onHold1 }}"
-              - conditions:
-                  - condition: template
-                    value_template: "{{use_override_1 == 'default'}}"
-                sequence:
-                  - repeat:
-                      while:
-                        - condition: trigger
-                          id: onHold1
-                      sequence:
-                        - service: light.turn_on
-                          data:
-                            brightness_step_pct: !input brightness_step_1
-                          target:
-                            entity_id: !input light_entity_1
-                        - delay:
-                            milliseconds: !input delay_1
-                          enabled: true
+        sequence:
+          - repeat:
+              while:
+                - condition: trigger
+                  id: onHold1
+              sequence:
+                - service: light.turn_on
+                  data:
+                    brightness_step_pct: !input brightness_step_1
+                  target:
+                    entity_id: !input light_entity_1
+                - delay:
+                    milliseconds: !input delay_1
+                  enabled: true
       - conditions:
           - condition: trigger
             id: offHold1
         sequence:
-          - choose:
-            - conditions:
-              - condition: template
-                value_template: "{{use_override_1 == 'override'}}"
+          - repeat:
+              while:
+                - condition: trigger
+                  id: offHold1
+                - condition: numeric_state
+                  entity_id: !input light_entity_1
+                  attribute: brightness
+                  above: 2
               sequence:
-                - choose:
-                  - conditions:
-                    - condition: template
-                      value_template: "{{ action_offHold1 is not none}}"
-                    sequence:
-                      - variables:
-                            service_name_off1: "{{ action_offHold1[0].action }}"
-                            service_data_off1: "{{ action_offHold1[0].data }}"
-                      - service: "{{ service_name_offHold1 }}"
-                        data: "{{ service_data_offHold1 }}"
-            - conditions:
-              - condition: template
-                value_template: "{{use_override_1 == 'default'}}"
-              sequence:
-                - repeat:
-                    while:
-                      - condition: trigger
-                        id: offHold1
-                      - condition: numeric_state
-                        entity_id: !input light_entity_1
-                        attribute: brightness
-                        above: 2
-                    sequence:
-                      - service: light.turn_on
-                        data:
-                          brightness_step_pct: !input brightness_step_down_1
-                          entity_id: !input light_entity_1
-                      - delay:
-                          milliseconds: !input delay_1
-                        enabled: true
+                - service: light.turn_on
+                  data:
+                    brightness_step_pct: !input brightness_step_down_1
+                    entity_id: !input light_entity_1
+                - delay:
+                    milliseconds: !input delay_1
+                  enabled: true
     alias: Entity 1
   - choose:
       - conditions:
           - condition: trigger
             id: on2
         sequence:
-          - choose:
-              - conditions:
-                  - condition: template
-                    value_template:  "{{use_override_2 == 'override' }}"
-                sequence: 
-                  - choose:
-                    - conditions:
-                      - condition: template
-                        value_template: "{{action_on2 is not none}}"
-                      sequence:
-                        - variables:
-                              service_name_on2: "{{ action_on2[0].action }}"
-                              service_data_on2: "{{ action_on2[0].data }}"
-                        - service: "{{ service_name_on2 }}"
-                          data: "{{ service_data_on2 }}"
-              - conditions:
-                  - condition: template
-                    value_template:  "{{use_override_2 == 'default'}}"
-                sequence:
-                - service: light.turn_on
-                  target:
-                    entity_id: !input light_entity_2
-                  data:
-                    brightness_pct: 100
+          - service: light.turn_on
+            target:
+              entity_id: !input light_entity_2
+            data:
+              brightness_pct: 100
       - conditions:
           - condition: trigger
             id: off2
         sequence:
-          - choose:
-            - conditions:
-              - condition: template
-                value_template: "{{use_override_2 == 'override'}}"
-              sequence:
-                - choose:
-                  - conditions:
-                    - condition: template
-                      value_template: "{{ action_off2 is not none}}"
-                    sequence:
-                      - variables:
-                            service_name_off2: "{{ action_off2[0].action }}"
-                            service_data_off2: "{{ action_off2[0].data }}"
-                      - service: "{{ service_name_off2 }}"
-                        data: "{{ service_data_off2 }}"
-            - conditions:
-              - condition: template
-                value_template: "{{use_override_2 == 'default'}}"
-              sequence:
-              - service: light.turn_off
-                target:
-                  entity_id: !input light_entity_2
+          - service: light.turn_off
+            target:
+              entity_id: !input light_entity_2
       - conditions:
           - condition: trigger
             id: onHold2
-            sequence:
-          - choose:
-              - conditions:
-                  - condition: template
-                    value_template:  "{{use_override_2 == 'override' }}"
-                sequence: 
-                  - choose:
-                    - conditions:
-                      - condition: template
-                        value_template: "{{action_onHold2 is not none}}"
-                      sequence:
-                        - variables:
-                              service_name_on2: "{{ action_onHold2[0].action }}"
-                              service_data_on2: "{{ action_onHold2[0].data }}"
-                        - service: "{{ service_name_onHold2 }}"
-                          data: "{{ service_data_onHold2 }}"
-              - conditions:
-                  - condition: template
-                    value_template: "{{use_override_2 == 'default'}}"
-                sequence:
-                  - repeat:
-                      while:
-                        - condition: trigger
-                          id: onHold2
-                      sequence:
-                        - service: light.turn_on
-                          data:
-                            brightness_step_pct: !input brightness_step_2
-                          target:
-                            entity_id: !input light_entity_2
-                        - delay:
-                            milliseconds: !input delay_2
-                          enabled: true
+        sequence:
+          - repeat:
+              while:
+                - condition: trigger
+                  id: onHold2
+              sequence:
+                - service: light.turn_on
+                  data:
+                    brightness_step_pct: !input brightness_step_2
+                  target:
+                    entity_id: !input light_entity_2
+                - delay:
+                    milliseconds: !input delay_2
+                  enabled: true
       - conditions:
           - condition: trigger
             id: offHold2
         sequence:
-          - choose:
-            - conditions:
-              - condition: template
-                value_template: "{{use_override_2 == 'override'}}"
+          - repeat:
+              while:
+                - condition: trigger
+                  id: offHold2
+                - condition: numeric_state
+                  entity_id: !input light_entity_2
+                  attribute: brightness
+                  above: 2
               sequence:
-                - choose:
-                  - conditions:
-                    - condition: template
-                      value_template: "{{ action_offHold2 is not none}}"
-                    sequence:
-                      - variables:
-                            service_name_off2: "{{ action_offHold2[0].action }}"
-                            service_data_off2: "{{ action_offHold2[0].data }}"
-                      - service: "{{ service_name_offHold2 }}"
-                        data: "{{ service_data_offHold2 }}"
-            - conditions:
-              - condition: template
-                value_template: "{{use_override_2 == 'default'}}"
-              sequence:
-                - repeat:
-                    while:
-                      - condition: trigger
-                        id: offHold2
-                      - condition: numeric_state
-                        entity_id: !input light_entity_2
-                        attribute: brightness
-                        above: 2
-                    sequence:
-                      - service: light.turn_on
-                        data:
-                          brightness_step_pct: !input brightness_step_down_2
-                          entity_id: !input light_entity_2
-                      - delay:
-                          milliseconds: !input delay_2
-                        enabled: true
+                - service: light.turn_on
+                  data:
+                    brightness_step_pct: !input brightness_step_down_2
+                    entity_id: !input light_entity_2
+                - delay:
+                    milliseconds: !input delay_2
+                  enabled: true
     alias: Entity 2
   - choose:
       - conditions:
           - condition: trigger
             id: on3
         sequence:
-          - choose:
-              - conditions:
-                  - condition: template
-                    value_template: "{{use_override_3 == 'override' }}"
-                sequence: 
-                  - choose:
-                    - conditions:
-                      - condition: template
-                        value_template: "{{action_on3 is not none}}"
-                      sequence:
-                        - variables:
-                              service_name_on3: "{{ action_on3[0].action }}"
-                              service_data_on3: "{{ action_on3[0].data }}"
-                        - service: "{{ service_name_on3 }}"
-                          data: "{{ service_data_on3 }}"
-              - conditions:
-                  - condition: template
-                    value_template:  "{{use_override_3 == 'default'}}"
-                sequence:
-                - service: light.turn_on
-                  target:
-                    entity_id: !input light_entity_3
-                  data:
-                    brightness_pct: 100
+          - service: light.turn_on
+            target:
+              entity_id: !input light_entity_3
+            data:
+              brightness_pct: 100
       - conditions:
           - condition: trigger
             id: off3
         sequence:
-          - choose:
-            - conditions:
-              - condition: template
-                value_template: "{{use_override_3 == 'override'}}"
-              sequence:
-                - choose:
-                  - conditions:
-                    - condition: template
-                      value_template: "{{ action_off3 is not none}}"
-                    sequence:
-                      - variables:
-                            service_name_off3: "{{ action_off3[0].action }}"
-                            service_data_off3: "{{ action_off3[0].data }}"
-                      - service: "{{ service_name_off3 }}"
-                        data: "{{ service_data_off3 }}"
-            - conditions:
-              - condition: template
-                value_template: "{{use_override_3 == 'default'}}"
-              sequence:
-              - service: light.turn_off
-                target:
-                  entity_id: !input light_entity_3
+          - service: light.turn_off
+            target:
+              entity_id: !input light_entity_3
       - conditions:
           - condition: trigger
             id: onHold3
-            sequence:
-          - choose:
-              - conditions:
-                  - condition: template
-                    value_template: "{{use_override_3 == 'override' }}"
-                sequence: 
-                  - choose:
-                    - conditions:
-                      - condition: template
-                        value_template: "{{action_onHold3 is not none}}"
-                      sequence:
-                        - variables:
-                              service_name_on3: "{{ action_onHold3[0].action }}"
-                              service_data_on3: "{{ action_onHold3[0].data }}"
-                        - service: "{{ service_name_onHold3 }}"
-                          data: "{{ service_data_onHold3 }}"
-              - conditions:
-                  - condition: template
-                    value_template:  "{{use_override_3 == 'default'}}"
-                sequence:
-                  - repeat:
-                      while:
-                        - condition: trigger
-                          id: onHold3
-                      sequence:
-                        - service: light.turn_on
-                          data:
-                            brightness_step_pct: !input brightness_step_3
-                          target:
-                            entity_id: !input light_entity_3
-                        - delay:
-                            milliseconds: !input delay_3
-                          enabled: true
+        sequence:
+          - repeat:
+              while:
+                - condition: trigger
+                  id: onHold3
+              sequence:
+                - service: light.turn_on
+                  target:
+                    entity_id: !input light_entity_3
+                  data:
+                    brightness_step_pct: !input brightness_step_3
+                - delay:
+                    milliseconds: !input delay_3
       - conditions:
           - condition: trigger
             id: offHold3
         sequence:
-          - choose:
-            - conditions:
-              - condition: template
-                value_template: "{{use_override_3 == 'override'}}"
+          - repeat:
+              while:
+                - condition: trigger
+                  id: offHold3
+                - condition: numeric_state
+                  entity_id: !input light_entity_3
+                  attribute: brightness
+                  above: 2
               sequence:
-                - choose:
-                  - conditions:
-                    - condition: template
-                      value_template: "{{ action_offHold3 is not none}}"
-                    sequence:
-                      - variables:
-                            service_name_off3: "{{ action_offHold3[0].action }}"
-                            service_data_off3: "{{ action_offHold3[0].data }}"
-                      - service: "{{ service_name_offHold3 }}"
-                        data: "{{ service_data_offHold3 }}"
-            - conditions:
-              - condition: template
-                value_template: "{{use_override_3 == 'default'}}"
-              sequence:
-                - repeat:
-                    while:
-                      - condition: trigger
-                        id: offHold3
-                      - condition: numeric_state
-                        entity_id: !input light_entity_3
-                        attribute: brightness
-                        above: 2
-                    sequence:
-                      - service: light.turn_on
-                        data:
-                          brightness_step_pct: !input brightness_step_down_3
-                          entity_id: !input light_entity_3
-                      - delay:
-                          milliseconds: !input delay_3
-                        enabled: true
+                - service: light.turn_on
+                  target:
+                    entity_id: !input light_entity_3
+                  data:
+                    brightness_step_pct: !input brightness_step_down_3
+                - delay:
+                    milliseconds: !input delay_3
     alias: Entity 3
   - choose:
       - conditions:
           - condition: trigger
             id: on4
         sequence:
-          - choose:
-              - conditions:
-                  - condition: template
-                    value_template:  "{{use_override_4 == 'override' }}"
-                sequence: 
-                  - choose:
-                    - conditions:
-                      - condition: template
-                        value_template: "{{action_on4 is not none}}"
-                      sequence:
-                        - variables:
-                              service_name_on4: "{{ action_on4[0].action }}"
-                              service_data_on4: "{{ action_on4[0].data }}"
-                        - service: "{{ service_name_on4 }}"
-                          data: "{{ service_data_on4 }}"
-              - conditions:
-                  - condition: template
-                    value_template:  "{{use_override_4 == 'default'}}"
-                sequence:
-                - service: light.turn_on
-                  target:
-                    entity_id: !input light_entity_4
-                  data:
-                    brightness_pct: 100
+          - service: light.turn_on
+            target:
+              entity_id: !input light_entity_4
+            data:
+              brightness_pct: 100
       - conditions:
           - condition: trigger
             id: off4
         sequence:
-          - choose:
-            - conditions:
-              - condition: template
-                value_template: "{{use_override_4 == 'override'}}"
-              sequence:
-                - choose:
-                  - conditions:
-                    - condition: template
-                      value_template: "{{ action_off4 is not none}}"
-                    sequence:
-                      - variables:
-                            service_name_off4: "{{ action_off4[0].action }}"
-                            service_data_off4: "{{ action_off4[0].data }}"
-                      - service: "{{ service_name_off4 }}"
-                        data: "{{ service_data_off4 }}"
-            - conditions:
-              - condition: template
-                value_template: "{{use_override_4 == 'default'}}"
-              sequence:
-              - service: light.turn_off
-                target:
-                  entity_id: !input light_entity_4
+          - service: light.turn_off
+            target:
+              entity_id: !input light_entity_4
       - conditions:
           - condition: trigger
             id: onHold4
-            sequence:
-          - choose:
-              - conditions:
-                  - condition: template
-                    value_template:  "{{use_override_4 == 'override' }}"
-                sequence: 
-                  - choose:
-                    - conditions:
-                      - condition: template
-                        value_template: "{{action_onHold4 is not none}}"
-                      sequence:
-                        - variables:
-                              service_name_on4: "{{ action_onHold4[0].action }}"
-                              service_data_on4: "{{ action_onHold4[0].data }}"
-                        - service: "{{ service_name_onHold4 }}"
-                          data: "{{ service_data_onHold4 }}"
-              - conditions:
-                  - condition: template
-                    value_template: "{{use_override_4 == 'default'}}"
-                sequence:
-                  - repeat:
-                      while:
-                        - condition: trigger
-                          id: onHold4
-                      sequence:
-                        - service: light.turn_on
-                          data:
-                            brightness_step_pct: !input brightness_step_4
-                          target:
-                            entity_id: !input light_entity_4
-                        - delay:
-                            milliseconds: !input delay_4
-                          enabled: true
+        sequence:
+          - repeat:
+              while:
+                - condition: trigger
+                  id: onHold4
+              sequence:
+                - service: light.turn_on
+                  target:
+                    entity_id: !input light_entity_4
+                  data:
+                    brightness_step_pct: !input brightness_step_4
+                - delay:
+                    milliseconds: !input delay_4
       - conditions:
           - condition: trigger
             id: offHold4
         sequence:
-          - choose:
-            - conditions:
-              - condition: template
-                value_template: "{{use_override_4 == 'override'}}"
+          - repeat:
+              while:
+                - condition: trigger
+                  id: offHold4
+                - condition: numeric_state
+                  entity_id: !input light_entity_4
+                  attribute: brightness
+                  above: 2
               sequence:
-                - choose:
-                  - conditions:
-                    - condition: template
-                      value_template: "{{ action_offHold4 is not none}}"
-                    sequence:
-                      - variables:
-                            service_name_off4: "{{ action_offHold4[0].action }}"
-                            service_data_off4: "{{ action_offHold4[0].data }}"
-                      - service: "{{ service_name_offHold4 }}"
-                        data: "{{ service_data_offHold4 }}"
-            - conditions:
-              - condition: template
-                value_template: "{{use_override_4 == 'default'}}"
-              sequence:
-                - repeat:
-                    while:
-                      - condition: trigger
-                        id: offHold4
-                      - condition: numeric_state
-                        entity_id: !input light_entity_4
-                        attribute: brightness
-                        above: 2
-                    sequence:
-                      - service: light.turn_on
-                        data:
-                          brightness_step_pct: !input brightness_step_down_4
-                          entity_id: !input light_entity_4
-                      - delay:
-                          milliseconds: !input delay_4
-                        enabled: true
+                - service: light.turn_on
+                  target:
+                    entity_id: !input light_entity_4
+                  data:
+                    brightness_step_pct: !input  brightness_step_down_4
+                - delay:
+                    milliseconds: !input delay_4
     alias: Entity 4
 mode: restart
