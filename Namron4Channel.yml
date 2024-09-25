@@ -1,5 +1,5 @@
 blueprint:
-  name: NAMRON 4 Channel ZigBee Switch v2.49969 (beta)
+  name: NAMRON 4 Channel ZigBee Switch v2.49970 (beta)
   description: Controls lights based on ZHA events for each endpoint. Note that the NAMRON 4 Strip switch have the buttons arranged backwards. Seen from left to right, the buttons are Button 4, Button 3, Button 2 and Button 1.
   domain: automation
   input:
@@ -624,7 +624,7 @@ action:
                           data: "{{ service_data_onHold1 }}"
               - conditions:
                   - condition: template
-                    value_template:  "{{use_override_1 == 'default'}}"
+                    value_template: "{{use_override_1 == 'default'}}"
                 sequence:
                   - repeat:
                       while:
@@ -687,7 +687,7 @@ action:
           - choose:
               - conditions:
                   - condition: template
-                    value_template:  "{{use_override_2 == 'override' }}"
+                    value_template: "{{use_override_2 == 'override' }}"
                 sequence: 
                   - choose:
                     - conditions:
@@ -741,7 +741,7 @@ action:
           - choose:
               - conditions:
                   - condition: template
-                    value_template:  "{{use_override_2 == 'override' }}"
+                    value_template: "{{use_override_2 == 'override' }}"
                 sequence: 
                   - choose:
                     - conditions:
@@ -818,7 +818,7 @@ action:
           - choose:
               - conditions:
                   - condition: template
-                    value_template:  "{{use_override_3 == 'override' }}"
+                    value_template: "{{use_override_3 == 'override' }}"
                 sequence: 
                   - choose:
                     - conditions:
@@ -872,7 +872,7 @@ action:
           - choose:
               - conditions:
                   - condition: template
-                    value_template:  "{{use_override_3 == 'override' }}"
+                    value_template: "{{use_override_3 == 'override' }}"
                 sequence: 
                   - choose:
                     - conditions:
@@ -1017,7 +1017,7 @@ action:
                           data: "{{ service_data_onHold4 }}"
               - conditions:
                   - condition: template
-                    value_template:  "{{use_override_4 == 'default'}}"
+                    value_template: "{{use_override_4 == 'default'}}"
                 sequence:
                   - repeat:
                       while:
