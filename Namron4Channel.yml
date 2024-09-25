@@ -687,7 +687,7 @@ action:
           - choose:
               - conditions:
                   - condition: template
-                    value_template: "{{use_override_2 == 'override' }}"
+                    value_template:  "{{use_override_2 == 'override' }}"
                 sequence: 
                   - choose:
                     - conditions:
@@ -741,7 +741,7 @@ action:
           - choose:
               - conditions:
                   - condition: template
-                    value_template: "{{use_override_2 == 'override' }}"
+                    value_template:  "{{use_override_2 == 'override' }}"
                 sequence: 
                   - choose:
                     - conditions:
@@ -749,13 +749,13 @@ action:
                         value_template: "{{action_onHold2 is not none}}"
                       sequence:
                         - variables:
-                              service_name_on2: "{{ action_onHold1[0].action }}"
-                              service_data_on2: "{{ action_onHold1[0].data }}"
+                              service_name_on2: "{{ action_onHold2[0].action }}"
+                              service_data_on2: "{{ action_onHold2[0].data }}"
                         - service: "{{ service_name_onHold2 }}"
                           data: "{{ service_data_onHold2 }}"
               - conditions:
                   - condition: template
-                    value_template:  "{{use_override_2 == 'default'}}"
+                    value_template: "{{use_override_2 == 'default'}}"
                 sequence:
                   - repeat:
                       while:
